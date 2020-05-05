@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css">
+    <script src="https://www.layuicdn.com/layui/layui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<form class="layui-form">
+    <input type="hidden" th:value="${complaintSuggestion.complaintsuggestionid}" name="complaintsuggestionid">
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属房间：</label>
+        <div class="layui-input-block">
+            <input type="text" name="roomno" th:value="${complaintSuggestion.roomno}" lay-verify="title" autocomplete="off"  class="layui-input" disabled="disabled">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">投诉人：</label>
+        <div class="layui-input-block">
+            <input type="text" name="complainant" th:value="${complaintSuggestion.complainant}"   class="layui-input" disabled="disabled">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">联系方式：</label>
+        <div class="layui-input-block">
+            <input type="text" name="complainantnumber" th:value="${complaintSuggestion.complainantnumber}" class="layui-input" disabled="disabled">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">投诉类型：</label>
+        <div class="layui-input-block">
+            <input type="text" name="complainanttype" th:value="${complaintSuggestion.complainanttype}"  class="layui-input" disabled="disabled">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">投诉时间：</label>
+        <div class="layui-input-block">
+            <input type="text" name="complainanttime" th:value="${complaintSuggestion.complainanttime}"  class="layui-input" disabled="disabled">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">事件描述：</label>
+        <div class="layui-input-block">
+            <input type="text" name="complainanteventdescription" th:value="${complaintSuggestion.complainanteventdescription}"  class="layui-input" disabled="disabled">
+        </div>
+    </div>
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">回访信息</li>
+        </ul>
+        <div class="layui-form-item">
+            <label class="layui-form-label">回访人：</label>
+            <div class="layui-input-block">
+                <select name="visitor" lay-verify="">
+                    <option th:each="n:${nName}" th:value="${n.nickname}" th:text="${n.nickname}"></option>
+                </select>
+            </div>
+        </div>
+            <div style="margin-top: 20px;margin-left: 28px;">满意程度：</div>
+            <div class="layui-form-item" style="width:240px;margin-left: 110px; margin-top: -20px;">
+                <select name="degreeofsatisfaction" lay-verify="">
+                    <option value="">==请选择==</option>
+                    <option value="很不满意">很不满意</option>
+                    <option value="不满意">不满意</option>
+                    <option value="一般">一般</option>
+                    <option value="满意">满意</option>
+                    <option value="非常满意">非常满意</option>
+                </select>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">回访备注：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="returnnotes" th:value="${complaintSuggestion.returnnotes}"  class="layui-input">
+                </div>
+            </div>
+    </div>
+
+    <div style="margin-left: 210px">
+        <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="tijiao">提交</button>
+    </div>
+</form>
+<script type="text/javascript">
+    layui.use(['form', 'layer', 'laydate','element'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,laydate = layui.laydate
+            ,element = layui.element
+            ,$=layui.jquery;
+        //监听提交
+        form.on('submit(tijiao)', function(data){
+            //data.field表单所有信息
+            $.post("updateComplaint2",data.field,function(result)
+                {
+                    layer.msg(result.msg, {
+                        icon: 1,
+                        time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                    }, function(){
+                        //刷新父页面
+                        parent.window.location.reload();
+                    });
+                }
+            );
+            return false;
+        });
+    });
+</script>
+
+</body>
+</html>

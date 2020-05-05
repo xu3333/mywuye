@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css">
+    <script src="https://www.layuicdn.com/layui/layui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+
+<form class="layui-form" th:each="b:${gsb}">
+    <input type="hidden" th:name="carportid" th:value="${b.carportid}">
+    <input type="button" th:name="roomid" th:value="${b.roomid}">
+    <div class="layui-form-item">
+        <label class="layui-form-label">车位号</label>
+        <div class="layui-input-block">
+            <input type="text" name="carportno" th:value="${b.carportno}" id="name" lay-verify="title" autocomplete="off" disabled="disabled" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">房间</label>
+        <div class="layui-input-block">
+            <select th:name="roomno" lay-filter="aihao"  >
+                <option th:each="c:${rc}"  th:value="${c.roomno}" th:text="${c.roomno}" th:selected="${c.roomid == b.roomid}" th:id="clientname1" ></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">客户</label>
+        <div class="layui-input-block" >
+            <input type="text" name="clientname"  id="clientname"  lay-verify="title"  class="layui-input" th:value="${b.clientname}"  disabled="disabled">
+        </div>
+    </div>
+
+    <div class="layui-inline">
+        <label class="layui-form-label">开始日期</label>
+        <div class="layui-input-inline">
+            <input type="text" name="cbegintime" th:value="${b.cbegintime}" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-inline">
+        <label class="layui-form-label">结束日期</label>
+        <div class="layui-input-inline">
+            <input type="text" name="cendtime" th:value="${b.cendtime}" id="date1" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div style="margin-left: 210px">
+        <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="tijiao">提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+</form>
+
+<script type="text/javascript">
+
+
+    layui.use(['form', 'layer', 'laydate','element'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,laydate = layui.laydate
+            ,element = layui.element
+            ,$=layui.jquery//定义$
+        //日期
+        laydate.render({
+            elem: '#date',
+            trigger:'click'
+        });
+        laydate.render({
+            elem: '#date1',
+            trigger:'click'
+        });
+        // 监听
+            // select下拉框选中触发事件
+            form.on("select", function(data){
+                var roomid=data.value;
+                alert(roomid)
+               layui.$.ajax({
+                   type:'post',
+                   url:'selC',
+                   data:{
+                       'roomno':data.value
+                   },
+                   dataType:'json',
+                   success:function (result) {
+                       $("#clientname").val(result.data);
+                   }
+
+               })
+
+            });
+
+        //监听提交
+        form.on('submit(tijiao)', function(data){
+            if($("#clientname").val()==""){
+                alert("客户名不能为空！") ;
+                return false;
+            }
+            else {
+                $.post("upBtn", data.field, function (result) {
+
+                    layer.msg(result.msg, {
+                            icon: 1,
+                            time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                        },
+
+                        function () {
+                            //刷新父页面
+                            parent.window.location.reload();
+                        });
+
+                    }
+                );
+            }
+            //阻止form表单提交
+            return false;
+        });
+    });
+</script>
+
+</body>
+</html>

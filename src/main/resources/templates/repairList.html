@@ -1,0 +1,283 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>表格</title>-->
+
+<!--    <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css">-->
+<!--    <script src="https://www.layuicdn.com/layui/layui.js"></script>-->
+<!--    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>-->
+<!--</head>-->
+<!--<style>-->
+<!--</style>-->
+<!--<body>-->
+
+<!--<div class="demoTable">-->
+<!--    搜索姓名：-->
+<!--    <div class="layui-inline">-->
+<!--        <input class="layui-input" name="id" id="demoReload" autocomplete="off">-->
+<!--    </div>-->
+<!--    <button class="layui-btn" data-type="reload" id="searchBtn">搜索</button>-->
+<!--</div>-->
+
+<!--<script type="text/html" id="toolbarDemo">-->
+<!--    <div class="layui-btn-container">-->
+<!--        <button class="layui-btn layui-btn-sm" lay-event="addBtn"><i class="layui-icon">添加</i></button>-->
+<!--        <button class="layui-btn layui-btn-sm" lay-event="slBtn"><i class="layui-icon">受理&派工</i></button>-->
+<!--        <button class="layui-btn layui-btn-sm" lay-event="sfBtn"><i class="layui-icon">收费</i></button>-->
+<!--        <button class="layui-btn layui-btn-sm" lay-event="ywwcBtn"><i class="layui-icon">业务完成</i></button>-->
+<!--    </div>-->
+<!--</script>-->
+
+<!--<table class="layui-hide" id="demo" lay-filter="test"></table>-->
+
+<!--<script type="text/html" id="barDemo">-->
+<!--    <a class="layui-btn layui-btn-xs" lay-event="xqBtn">详情</a>-->
+<!--    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
+<!--</script>-->
+
+<!--<script>-->
+<!--    layui.use([ 'laypage', 'layer', 'table'], function(){-->
+<!--        var laypage = layui.laypage //分页-->
+<!--            ,layer = layui.layer //弹层-->
+<!--            ,table = layui.table;//表格-->
+
+
+<!--        //执行一个 table 实例-->
+<!--        table.render({-->
+<!--            elem: '#demo'-->
+<!--            ,height: 550-->
+<!--            ,url: 'listDataRepair' //数据接口-->
+<!--            ,title: '用户表'-->
+<!--            ,page: true //开启分页-->
+<!--            ,toolbar: '#toolbarDemo' //开启工具栏，此处显示默认图标，可以自定义模板-->
+<!--            ,totalRow: true //开启合计行-->
+<!--            ,limits:[5,10,15]-->
+
+<!--            ,cols: [-->
+<!--                [ //表头-->
+<!--                    {type: 'checkbox', fixed: 'left'}-->
+<!--                    ,{field: 'repairListId', title: '报修编号', width:80, sort: true, fixed: 'left'}-->
+<!--                    ,{field: 'unitNumber', title: '单元号', width:80}-->
+<!--                    ,{field: 'floorNumber', title: '楼层号', width:80}-->
+<!--                    ,{field: 'roomNo', title: '房间编号', width:100}-->
+<!--                    ,{field: 'clientname', title: '联系人', width: 90}-->
+<!--                    ,{field: 'contactsNumber', title: '联系电话', width:150}-->
+<!--                    ,{field: 'repairType', title: '报修类型', width: 150}-->
+<!--                    ,{field:'repairProject', width:80, title: '报修项目'}-->
+<!--                    ,{field:'problemDescription', width:100, title: '问题描述'}-->
+<!--                    ,{field:'statu', width:80, title: '状态',-->
+<!--                        templet: function(res){-->
+<!--                            if(res.statu == 0){-->
+<!--                                return "已回访";-->
+<!--                            }else if(res.statu == 1){-->
+<!--                                return "已收费";-->
+<!--                            }-->
+<!--                            else if(res.statu == 10){-->
+<!--                                return "已完工";-->
+<!--                            }-->
+<!--                            else if(res.statu == 3){-->
+<!--                                return "已撤销";-->
+<!--                            }-->
+<!--                            else if(res.statu == 7){-->
+<!--                                return "已派工";-->
+<!--                            }-->
+<!--                            else{-->
+<!--                                return "未派工";-->
+<!--                            }-->
+<!--                        }-->
+<!--                    }-->
+<!--                    ,{field:'applicationTime', title: '申请时间', width: 100} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增-->
+<!--                    ,{field:'timeOfAppointment',width:100, title: '预约时间'}-->
+<!--                    ,{field:'completionTime', width:100,title: '完成时间'}-->
+<!--                    ,{field:'finishRen',width:100, title: '完成人'}-->
+<!--                    ,{field:'completeRemarks',width:100, title: '完成备注'}-->
+<!--                    ,{field:'chargeStatus',width:100, title: '收费状态',-->
+<!--                        templet: function(res){-->
+<!--                            if(res.chargeStatus == 1){-->
+<!--                                return "已收费";-->
+<!--                            }else{-->
+<!--                                return "未收费";-->
+<!--                            }-->
+<!--                        }-->
+<!--                    }-->
+<!--                    ,{field:'requiredCompletionTime',width:100, title: '要求完成时间'}-->
+<!--                    ,{field:'source',width:100, title: '来源'}-->
+<!--                    ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}-->
+<!--                ]-->
+<!--            ]-->
+<!--            , id: 'listData'-->
+<!--        });-->
+
+<!--        //监听头工具栏事件-->
+<!--        table.on('toolbar(test)', function(obj){-->
+<!--            var checkStatus = table.checkStatus(obj.config.id)-->
+<!--                ,data = checkStatus.data; //获取选中的数据-->
+<!--            switch(obj.event){-->
+<!--                case 'addBtn':-->
+<!--                    //添加-->
+<!--                    layer.open({-->
+<!--                        type:2,      //layer的5种层类型   0（信息框，默认）、1（页面层）、2（iframe层）、3（加载层）、4（tips层）-->
+<!--                        title: ['新增报修单', 'font-size:18px;'],  //弹出框标题-->
+<!--                        area: ['600px','500px'],    //设置弹框的大小-->
+<!--                        shadeClose:true,          //点击遮罩层外区域关闭遮罩层-->
+<!--                        offset:'t',-->
+<!--                        anim: 2,              //弹出动画-->
+<!--                        content:'addRepair'     //写方法的路径  进入页面  此处也和easyui相同-->
+<!--                    })-->
+<!--                    break;-->
+<!--                case 'slBtn':-->
+<!--                    if(data.length === 0){-->
+<!--                        layer.msg('请选择一行');-->
+<!--                    } else if(data.length > 1){-->
+<!--                        layer.msg('只能同时编辑一个');-->
+<!--                    } else {-->
+<!--                        // layer.alert('编辑 [id]：'+ checkStatus.data[0].id);-->
+<!--                        //修改-->
+<!--                        layer.open({-->
+<!--                            type: 2, //layer的5种层类型   0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）-->
+<!--                            title: ['受理&派工', 'font-size:18px;'],  //弹出框标题-->
+<!--                            shade: [0.5, '#393D49'],     //遮罩层-->
+<!--                            shadeClose:true,          //点击遮罩层外区域关闭遮罩层-->
+<!--                            offset:'t',-->
+<!--                            area: ['580px', '500px'],    //弹出框大小-->
+<!--                            anim: 1,              //弹出动画-->
+<!--                            content:'selectRepairListById?repairListId='+checkStatus.data[0].repairListId-->
+<!--                        });-->
+<!--                    }-->
+<!--                    break;-->
+<!--                case 'sfBtn':-->
+<!--                    if(data.length === 0){-->
+<!--                        layer.msg('请选择一行');-->
+<!--                    } else if(data.length > 1){-->
+<!--                        layer.msg('只能同时编辑一个');-->
+<!--                    } else {-->
+<!--                        // layer.alert('编辑 [id]：'+ checkStatus.data[0].id);-->
+<!--                        //修改-->
+<!--                        layer.open({-->
+<!--                            type: 2, //layer的5种层类型   0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）-->
+<!--                            title: ['收费', 'font-size:18px;'],  //弹出框标题-->
+<!--                            shade: [0.5, '#393D49'],     //遮罩层-->
+<!--                            shadeClose:true,          //点击遮罩层外区域关闭遮罩层-->
+<!--                            offset:'t',-->
+<!--                            area: ['580px', '500px'],    //弹出框大小-->
+<!--                            anim: 1,              //弹出动画-->
+<!--                            content:'selectRepairListById2?repairListId='+checkStatus.data[0].repairListId-->
+<!--                        });-->
+<!--                    }-->
+<!--                    break;-->
+<!--                case 'ywwcBtn':-->
+<!--                    if(data.length === 0){-->
+<!--                        layer.msg('请选择一行');-->
+<!--                    } else if(data.length > 1){-->
+<!--                        layer.msg('只能同时编辑一个');-->
+<!--                    } else {-->
+<!--                        // layer.alert('编辑 [id]：'+ checkStatus.data[0].id);-->
+<!--                        //修改-->
+<!--                        layer.open({-->
+<!--                            type: 2, //layer的5种层类型   0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）-->
+<!--                            title: ['收费', 'font-size:18px;'],  //弹出框标题-->
+<!--                            shade: [0.5, '#393D49'],     //遮罩层-->
+<!--                            shadeClose:true,          //点击遮罩层外区域关闭遮罩层-->
+<!--                            offset:'t',-->
+<!--                            area: ['580px', '500px'],    //弹出框大小-->
+<!--                            anim: 1,              //弹出动画-->
+<!--                            content:'selectRepairListById3?repairListId='+checkStatus.data[0].repairListId-->
+<!--                        });-->
+<!--                    }-->
+<!--                    break;-->
+<!--                case 'delete':-->
+<!--                    if(data.length === 0){-->
+<!--                        layer.msg('请选择一行');-->
+<!--                    } else {-->
+<!--                        //删除-->
+<!--                        layer.confirm('真的要删除吗？', function () {-->
+<!--                            $.post("deleteRepairList",{'repairListId':checkStatus.data[0].id},function(result)-->
+<!--                                {-->
+<!--                                    layer.msg(-->
+<!--                                        result.msg, {-->
+<!--                                            icon: 1,-->
+<!--                                            time: 1000 //2秒关闭（如果不配置，默认是3秒）-->
+<!--                                        }, function(){-->
+<!--                                            //刷新父页面-->
+<!--                                            parent.window.location.reload();-->
+<!--                                        });-->
+<!--                                }-->
+<!--                            );-->
+<!--                        });-->
+<!--                    }-->
+<!--                    break;-->
+<!--            };-->
+<!--        });-->
+
+<!--        //监听行工具事件-->
+<!--        table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"-->
+<!--            var data = obj.data //获得当前行数据-->
+<!--                ,layEvent = obj.event; //获得 lay-event 对应的值-->
+<!--            //修改-->
+<!--            if(layEvent === 'xqBtn'){-->
+<!--                layer.open({-->
+<!--                    type: 2, //layer的5种层类型   0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）-->
+<!--                    title: ['修改数据', 'font-size:18px;'],  //弹出框标题-->
+<!--                    shade: [0.5, '#393D49'],     //遮罩层-->
+<!--                    shadeClose:true,          //点击遮罩层外区域关闭遮罩层-->
+<!--                    offset:'t',-->
+<!--                    area: ['580px', '500px'],    //弹出框大小-->
+<!--                    anim: 1,              //弹出动画-->
+<!--                    content:'selectRepairListById4?repairListId='+data.repairListId-->
+<!--                });-->
+<!--            }-->
+<!--            //删除-->
+<!--            if(layEvent === 'del'){-->
+<!--                //操作-->
+<!--                layer.confirm('真的要删除吗？', function () {-->
+<!--                    $.post("deleteRepairList",{'repairListId':data.repairListId},function(result)-->
+<!--                        {-->
+<!--                            layer.msg(-->
+<!--                                result.msg, {-->
+<!--                                    icon: 1,-->
+<!--                                    time: 1000 //2秒关闭（如果不配置，默认是3秒）-->
+<!--                                }, function(){-->
+<!--                                    //刷新父页面-->
+<!--                                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存-->
+<!--                                    layer.close(index);-->
+<!--                                });-->
+<!--                        }-->
+<!--                    );-->
+<!--                });-->
+<!--            }-->
+<!--        });-->
+
+<!--        //分页-->
+<!--        laypage.render({-->
+<!--            elem: 'pageDemo' //分页容器的id-->
+<!--            ,count: 100 //总页数-->
+<!--            ,skin: '#1E9FFF' //自定义选中色值-->
+<!--            //,skip: true //开启跳页-->
+<!--            ,jump: function(obj, first){-->
+<!--                if(!first){-->
+<!--                    layer.msg('第'+ obj.curr +'页', {offset: 'b'});-->
+<!--                }-->
+<!--            }-->
+<!--        });-->
+
+<!--      //执行条件查询-->
+<!--        /*条件查询按钮*/-->
+<!--        var $ = layui.$;-->
+<!--        $('#searchBtn').on('click', function(){-->
+<!--            //获取输入框-->
+<!--            var demoReload = $('#demoReload');-->
+<!--            //执行重载-->
+<!--            table.reload('listData', {-->
+<!--                page: {-->
+<!--                    curr: 1 //重新从第 1 页开始-->
+<!--                }-->
+<!--                ,where: {-->
+<!--                    contacts: demoReload.val()-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->

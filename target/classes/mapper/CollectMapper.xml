@@ -1,0 +1,27 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhan.mapper.CollectMapper">
+    <select id="selcol" resultType="map" parameterType="map">
+        select r.roomno,c.clientname,p.patitemsName,f.paymentType,f.assessment,f.collectDate,f.tollgatherer from
+        clientMessage c,room r,louceng l,building b,items i,payitems p,feecontent f where
+        c.clientMessageId=r.clientMessageId and r.loucengID=l.loucengID
+            and l.buildingID=b.buildingID and p.itemsid=i.itemsid and f.clientMessageId=c.clientMessageId
+            <if test="clientname!=null and clientname!=''">
+                and c.clientname like concat('%',concat(#{clientname},'%'))
+            </if>
+            <if test="testh!=null and testh!=''">
+                and f.collectDate between #{Cbegin} and #{Cend}
+            </if>
+        LIMIT #{begin},#{end}
+    </select>
+    <select id="selcolCount" resultType="int">
+        select count(*) from clientMessage c,room r,louceng l,building b,items i,payitems p,feecontent f
+        <where>c.clientMessageId=r.clientMessageId and r.loucengID=l.loucengID
+            and l.buildingID=b.buildingID and p.itemsid=i.itemsid and f.clientMessageId=c.clientMessageId
+            <if test="clientname!=null and clientname!=''">
+                and clientname like concat('%',concat(#{clientname},'%'))
+            </if>
+        </where>
+    </select>
+</mapper>

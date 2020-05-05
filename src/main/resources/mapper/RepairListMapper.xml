@@ -1,0 +1,66 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yunhan.mapper.RepairListMapper">
+
+    <select id="selectAll" resultType="map" parameterType="map" >
+        select * from repairlist r LEFT JOIN room ro ON r.roomid= ro.roomid LEFT JOIN clientmessage c ON ro.clientmessageId=c.clientmessageId
+    <where>1=1
+        <if test="clientname!=null and clientname!=''">
+             and c.clientname like concat('%',concat(#{clientname},'%'))
+         </if>
+    </where>LIMIT #{begin},#{end}
+   </select>
+   <select id="selectCount" resultType="int">
+       select count(*) from repairlist r LEFT JOIN room ro ON r.roomid= ro.roomid LEFT JOIN clientmessage c ON ro.clientmessageId=c.clientmessageId
+       <where>1=1
+            <if test="clientname!=null and clientname!=''">
+                and clientname like concat('%',concat(#{clientname},'%'))
+            </if>
+       </where>
+   </select>
+   <insert id="addRepairList" parameterType="RepairList">
+        insert into repairList(repairlistid,unitnumber,floornumber,roomid,contactsnumber,repairtype,repairproject,problemdescription,timeofappointment,
+	        completiontime,finishren,completeremarks,source)
+        values(null,#{unitnumber},#{floornumber},#{roomid},#{contactsnumber},#{repairtype},#{repairproject},#{problemdescription},#{timeofappointment},
+            #{completiontime},#{finishren},#{completeremarks},'WEB系统');
+   </insert>
+    <select id="selectRepairListById" parameterType="int" resultType="RepairList">
+       select * from repairlist r LEFT JOIN room ro ON r.roomid= ro.roomid LEFT JOIN clientmessage c ON ro.clientmessageId=c.clientmessageId where repairListId=#{repairlistid}
+    </select>
+    <select id="selectRepairListById2" parameterType="int" resultType="RepairList">
+       select * from repairlist r LEFT JOIN room ro ON r.roomid= ro.roomid LEFT JOIN clientmessage c ON ro.clientmessageId=c.clientmessageId where repairListId=#{repairlistid}
+    </select>
+    <select id="selectRepairListById3" parameterType="int" resultType="RepairList">
+       select * from repairlist r LEFT JOIN room ro ON r.roomid= ro.roomid LEFT JOIN clientmessage c ON ro.clientmessageId=c.clientmessageId where repairListId=#{repairlistid}
+    </select>
+    <select id="selectRepairListById4" parameterType="int" resultType="RepairList">
+       select * from repairlist r LEFT JOIN room ro ON r.roomid= ro.roomid LEFT JOIN clientmessage c ON ro.clientmessageId=c.clientmessageId where repairListId=#{repairlistid}
+    </select>
+    <update id="updateSl" parameterType="RepairList">
+         update repairlist set statu=7,finishRen=#{finishren},acceptedRemarks=#{acceptedremarks},workRemarks=#{workremarks},chargeProject=#{chargeproject},chargeType=#{chargetype},price=#{price}  where repairListId=#{repairlistid}
+    </update>
+    <update id="updateSf" parameterType="RepairList">
+         update repairlist set statu=1,chargestatus=1,chargeProject=#{chargeproject},chargeType=#{chargetype},price=#{price},finishRen=#{finishren} where repairListId=#{repairlistid}
+    </update>
+    <update id="updateYwwc" parameterType="RepairList">
+         update repairlist set statu=10,finishRen=#{finishren},completeRemarks=#{completeremarks},degreeofsatisfaction=#{degreeofsatisfaction},completiontime=NOW()  where repairListId=#{repairlistid}
+    </update>
+    <delete id="deleteRepairList" parameterType="Integer">
+        delete from repairlist where repairListId=#{repairlistid}
+    </delete>
+    <!--查询房间-->
+    <select id="cselRoom" parameterType="RepairList" resultType="RepairList">
+        select * from room
+    </select>
+
+    <select id="cselC" parameterType="int" resultType="RepairList">
+        select c.clientname from room r LEFT JOIN clientMessage c on c.clientMessageId=r.clientMessageId where r.roomid=#{roomid}
+    </select>
+    <!--查询管理员-->
+    <select id="selectUser" parameterType="ComplaintSuggestion" resultType="ComplaintSuggestion">
+        select * from sys_user
+    </select>
+
+</mapper>

@@ -1,0 +1,98 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yunhan.mapper.GmdMapper">
+    <select id="selectAll" resultType="map" parameterType="map" >
+
+        select * from room r left JOIN clientMessage c on r.clientMessageId=c.clientMessageId
+        left join louceng l on r.loucengID = l.loucengID
+        left join building b on l.buildingID = b.buildingID
+        left join items i  on i.itemsid=b.itemsid
+        left join carport ct on c.carportID=ct.carportID
+
+        <where>
+            <if test="clientname!=null and clientname!=''">
+                and c.clientname like concat('%',concat(#{clientname},'%'))
+            </if>
+        </where>LIMIT #{begin},#{end}
+    </select>
+    <select id="selectCount" resultType="int">
+        select count(*) from clientMessage
+        <where>1=1
+            <if test="clientname!=null and clientname!=''">
+                and clientname like concat('%',concat(#{clientname},'%'))
+            </if>
+        </where>
+
+
+    </select>
+    <delete id="delRoom" parameterType="int">
+        delete from room where roomid=#{roomid}
+
+    </delete>
+
+    <!--查找楼栋单元号-->
+    <select id="selB" parameterType="GmdRoom" resultType="GmdRoom">
+        select * from building where buildingStatus=0
+
+    </select>
+    <!--通过楼层查找楼层总数-->
+    <select id="selBs" resultType="GmdRoom">
+        select loucengCount from building where buildingID=#{buildingid}
+    </select>
+
+    <!--添加房间时查询同一单元同一楼层是否存在-->
+    <select id="selAddr" parameterType="GmdRoom" resultType="int">
+        select count(*) from room r left join louceng c on r.loucengID=c.loucengID
+        left join building b on c.buildingID=b.buildingID where c.loucengno=#{loucengno} and b.buildingid=#{buildingid} and roomno=#{roomno}
+    </select>
+
+    <!--添加房间-->
+    <insert id="addRoom" parameterType="GmdRoom">
+   insert into room(roomNo,roomArea,houseType,finish,houseState,loucengID)VALUES(#{roomno},#{roomarea},#{housetype},#{finish},0,(select max(loucengid) from louceng))
+    </insert>
+
+    <!--执行添加时先添加楼层与楼宇-->
+    <insert id="addLoucy" parameterType="GmdRoom">
+        insert into louceng (loucengNO,buildingID)VALUES(#{loucengno},#{buildingid});
+    </insert>
+
+    <!--修改时查询-->
+    <select id="upSelRoom" parameterType="GmdRoom" resultType="GmdRoom">
+        select * from room r LEFT JOIN louceng c on r.loucengID=c.loucengID
+      left JOIN building b on b.buildingid=c.buildingid where r.roomid=#{roomid}
+    </select>
+
+    <!--&lt;!&ndash;先修改楼层表信息&ndash;&gt;-->
+    <!--<update id="upRlc">-->
+        <!--update louceng set loucengno=#{loucengno},buildingid=#{buildingid} where loucengid=#{loucengid}-->
+
+    <!--</update>-->
+    <!--再修改房间表信息-->
+    <update id="upRoom">
+        update room set roomno=#{roomno},roomArea=#{roomarea},houseType=#{housetype},finish=#{finish}
+       where roomid=#{roomid}
+    </update>
+
+    <!--添加时查询的单元号和楼层号-->
+    <select id="addSellr" parameterType="GmdRoom" resultType="GmdRoom">
+          select * from room r left JOIN clientMessage c on r.clientMessageId=c.clientMessageId
+        left join louceng l on r.loucengID = l.loucengID
+        left join building b on l.buildingID = b.buildingID
+        left join items i  on i.itemsid=b.itemsid
+        left join carport ct on c.carportID=ct.carportID where r.roomid=#{roomid}
+
+    </select>
+
+    <!--添加时查询客户姓名-->
+    <select id="addSelc" parameterType="GmdRoom" resultType="GmdRoom">
+        select clientname,clientMessageId from clientMessage
+    </select>
+
+    <!--执行添加并修改房间状态-->
+    <update id="addBtnroom" parameterType="GmdRoom">
+        update room set houseState=1,clientMessageId=#{clientmessageid} where roomid=#{roomid}
+    </update>
+
+</mapper>

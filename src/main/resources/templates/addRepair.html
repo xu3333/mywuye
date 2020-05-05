@@ -1,0 +1,166 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>添加</title>-->
+<!--    <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css">-->
+<!--    <script src="https://www.layuicdn.com/layui/layui.js"></script>-->
+<!--    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<form class="layui-form">-->
+<!--    <div class="layui-form-item" style="width:350px;">-->
+<!--        <label class="layui-form-label">单元楼：</label>-->
+<!--        <div class="layui-input-block">-->
+<!--            <input type="text" name="unitnumber" id="unitnumber" placeholder="请输入单元楼"  class="layui-input">-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="layui-form-item" style="width:350px;">-->
+<!--        <label class="layui-form-label">楼层号：</label>-->
+<!--        <div class="layui-input-block">-->
+<!--            <input type="text" name="floornumber" id="floornumber" placeholder="请输入楼层号"  class="layui-input">-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div style="margin-top: 20px;margin-left: 28px;">房间号：</div>-->
+<!--    <div class="layui-form-item" style="width:240px;margin-left: 110px; margin-top: -20px;">-->
+<!--        <select th:name="roomid" lay-verify="">-->
+<!--            <option th:each="r:${rc}" th:value="${r.roomid}" th:text="${r.roomno}"></option>-->
+<!--        </select>-->
+<!--    </div>-->
+<!--    <div class="layui-form-item" style="width:350px;">-->
+<!--        <label class="layui-form-label">联系人：</label>-->
+<!--        <div class="layui-input-block">-->
+<!--            <input type="text" name="clientname" id="clientname" placeholder="请输入联系人"  class="layui-input">-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="layui-form-item" style="width:350px;">-->
+<!--        <label class="layui-form-label">联系电话：</label>-->
+<!--        <div class="layui-input-block">-->
+<!--            <input type="text" name="contactsnumber" id="contactsnumber" placeholder="请输入联系电话"  class="layui-input">-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div style="margin-top: 20px;margin-left: 28px;">报修类型：</div>-->
+<!--    <div class="layui-form-item" style="width:240px;margin-left: 110px; margin-top: -20px;">-->
+<!--        <select name="repairtype" lay-verify="">-->
+<!--            <option value="">请选择报修类型</option>-->
+<!--            <option value="公共设施">公共设施</option>-->
+<!--            <option value="家用设施">家用设施</option>-->
+<!--        </select>-->
+<!--    </div>-->
+<!--    <div style="margin-top: 20px;margin-left: 28px;">报修项目：</div>-->
+<!--    <div class="layui-form-item" style="width:240px;margin-left: 110px; margin-top: -20px;">-->
+<!--        <select name="repairproject" lay-verify="">-->
+<!--            <option value="">请选择报修项目</option>-->
+<!--            <option value="电梯">电梯</option>-->
+<!--            <option value="水管">水管</option>-->
+<!--        </select>-->
+<!--    </div>-->
+<!--    <div class="layui-form-item" style="width:350px;">-->
+<!--        <label class="layui-form-label">问题描述：</label>-->
+<!--        <div class="layui-input-block">-->
+<!--            <input type="text" name="problemdescription" placeholder="请输入问题描述"  class="layui-input">-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="layui-form-item">-->
+<!--        <div class="layui-inline">-->
+<!--            <label class="layui-form-label">预约时间</label>-->
+<!--            <div class="layui-input-inline">-->
+<!--                <input type="text" class="layui-input" id="timeofappointment" name="timeofappointment" placeholder="-">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div style="margin-left: 210px">-->
+<!--        <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="tijiao">提交</button>-->
+<!--        <button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
+<!--    </div>-->
+<!--</form>-->
+<!--</body>-->
+<!--<script type="text/javascript">-->
+<!--    layui.use(['form', 'layer', 'laydate'], function(){-->
+<!--        var form = layui.form-->
+<!--            ,layer = layui.layer-->
+<!--            ,laydate = layui.laydate-->
+<!--            ,$=layui.jquery;//定义$-->
+<!--            laydate.render({-->
+<!--            elem: '#timeofappointment'-->
+<!--            ,trigger:'click'-->
+<!--        });-->
+
+
+<!--        // select下拉框选中触发事件-->
+<!--        form.on("select", function(data){-->
+<!--            var roomid=data.value;-->
+
+<!--            layui.$.ajax({-->
+<!--                type:'post',-->
+<!--                url:'cselC',-->
+<!--                data:{-->
+<!--                    'roomid':data.value-->
+<!--                },-->
+<!--                dataType:'json',-->
+<!--                success:function (result) {-->
+
+<!--                    $("#clientname").val(result.data);-->
+<!--                }-->
+
+<!--            })-->
+
+<!--        });-->
+
+
+
+
+
+
+<!--        //监听提交-->
+<!--        form.on('submit(tijiao)', function(data){-->
+<!--            //data.field表单所有信息-->
+<!--            if($("#unitnumber").val()==""){-->
+<!--                alert("单元楼不能为空！") ;-->
+<!--                return false;-->
+<!--            }-->
+<!--            if($("#floornumber").val()==""){-->
+<!--                alert("楼层号不能为空！") ;-->
+<!--                return false;-->
+<!--            }-->
+<!--            if($("#roomnumber").val()==""){-->
+<!--                alert("所属房间不能为空！") ;-->
+<!--                return false;-->
+<!--            }-->
+<!--            if($("#contacts").val()==""){-->
+<!--                alert("联系人不能为空！") ;-->
+<!--                return false;-->
+<!--            }-->
+<!--            if($("#contactsnumber").val()==""){-->
+<!--                alert("联系电话不能为空！") ;-->
+<!--                return false;-->
+<!--            }-->
+<!--            if($("#repairtype").val()==""){-->
+<!--                alert("报修类型不能为空！") ;-->
+<!--                return false;-->
+<!--            }-->
+
+<!--            if($("#price").val()>=1000){-->
+
+<!--                return false;-->
+<!--            }else {-->
+<!--                $.post("addRepairList",data.field,function(result)-->
+<!--                    {-->
+<!--                        layer.msg(result.msg, {-->
+<!--                            icon: 1,-->
+<!--                            time: 1000 //2秒关闭（如果不配置，默认是3秒）-->
+<!--                        }, function(){-->
+<!--                            //刷新父页面-->
+<!--                            parent.window.location.reload();-->
+<!--                        });-->
+<!--                    }-->
+<!--                );-->
+<!--            }-->
+<!--            //阻止form表单提交-->
+<!--            return false;-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<!--</html>-->

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css">
+    <script src="https://www.layuicdn.com/layui/layui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<form class="layui-form">
+    <input type="hidden" th:value="${complaintSuggestion.complaintsuggestionid}" name="complaintsuggestionid">
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属房间：</label>
+        <div class="layui-input-block">
+            <input type="text" name="roomno" th:value="${complaintSuggestion.roomno}" lay-verify="title" autocomplete="off"  class="layui-input" disabled="disabled">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">投诉人：</label>
+        <div class="layui-input-block">
+            <input type="text" name="complainant" th:value="${complaintSuggestion.complainant}"   class="layui-input" disabled="disabled">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">联系方式：</label>
+        <div class="layui-input-block">
+            <input type="text" name="complainantnumber" th:value="${complaintSuggestion.complainantnumber}" class="layui-input" disabled="disabled">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">投诉类型：</label>
+        <div class="layui-input-block">
+            <input type="text" name="complainanttype" th:value="${complaintSuggestion.complainanttype}"  class="layui-input" disabled="disabled">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">投诉时间：</label>
+        <div class="layui-input-block">
+            <input type="text" name="complainanttime" th:value="${complaintSuggestion.complainanttime}"  class="layui-input" disabled="disabled">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">事件描述：</label>
+        <div class="layui-input-block">
+            <input type="text" name="complainanteventdescription" th:value="${complaintSuggestion.complainanteventdescription}"  class="layui-input" disabled="disabled">
+        </div>
+    </div>
+
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">受理信息</li>
+        </ul>
+        <div class="layui-form-item">
+            <label class="layui-form-label">受理人：</label>
+            <div class="layui-input-block">
+                <select name="dealingwithpeople" lay-verify="">
+                    <option th:each="n:${nName}" th:value="${n.nickname}" th:text="${n.nickname}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">受理备注：</label>
+            <div class="layui-input-block">
+                <input type="text" name="dealingwithremarks" th:value="${complaintSuggestion.dealingwithremarks}"  class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div style="margin-left: 210px">
+        <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="tijiao">提交</button>
+    </div>
+</form>
+<script type="text/javascript">
+    layui.use(['form', 'layer', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,laydate = layui.laydate
+            ,$=layui.jquery;
+        //监听提交
+        form.on('submit(tijiao)', function(data){
+            //data.field表单所有信息
+            $.post("updateComplaint",data.field,function(result)
+                {
+                    layer.msg(result.msg, {
+                        icon: 1,
+                        time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                    }, function(){
+                        //刷新父页面
+                        parent.window.location.reload();
+                    });
+                }
+            );
+            return false;
+        });
+    });
+</script>
+
+</body>
+</html>

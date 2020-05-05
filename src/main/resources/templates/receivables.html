@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>应收账单</title>
+    <!--<link type="text/css" rel="stylesheet" th:href="@{/css/layui.css}" media="all"/>-->
+    <!--<link type="text/css" rel="stylesheet" th:href="@{/css/layer.css}"/>-->
+    <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css">
+    <script src="https://www.layuicdn.com/layui/layui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<div class="demoTable">
+    搜索房间编号：
+    <div class="layui-inline">
+        <input class="layui-input" name="roomNO" id="demoReload" placeholder="请输入房间编号" autocomplete="off">
+    </div>
+    <button class="layui-btn" data-type="reload" id="searchBtn">搜索</button>
+</div>
+
+<table class="layui-hide" id="demo" lay-filter="test"></table>
+
+</body>
+
+<script type="text/javascript" th:src="@{/js/layui.all.js}"></script>
+<script>
+    layui.use([ 'laypage', 'layer', 'table','form'], function() {
+        var laypage = layui.laypage //分页
+            , layer = layui.layer //弹层
+            , table = layui.table//表格
+            , form =layui.form;
+        //执行一个 table 实例
+        table.render({
+            elem: '#demo'
+            , height: 550
+            , url: 'listReceivables' //数据接口
+            , title: '用户表'
+            , page: true //开启分页
+            , totalRow: true //开启合计行
+            , limits: [5, 10, 15]
+            , cols: [
+                [ //表头, totalRowText: '合计：'
+                    {type: 'checkbox', fixed: 'left'}
+                    , {type: 'numbers', title: '编号',  width: 100, fixed: 'left',totalRowText: '合计应缴费用：'}
+                    , {field: 'buildingName', title: '楼宇', width: 100, align: 'center'}
+                    , {field: 'roomNO', title: '房间编号', width: 150}
+                    , {field: 'clientName', title: '客户姓名', width: 100}
+                    , {field: 'roomArea', title: '房产面积', width: 100, align: 'center'}
+                    , {field: 'phone', title: '手机号码', width: 150,edit:'text'}
+                    , {field: 'endtime', title: '截止日期', width: 150}
+                    , {field: 'payproject', title: '收费项', width: 100, align: 'center'}
+                    , {field: 'practical', title: '实用量', width: 100, align: 'center'}
+                    , {field: 'price', title: '单价', width: 100, align: 'center'}
+                    , {field: 'assessment', title: '应收金额', width: 100, align: 'center',totalRow: true}
+                    , {field: 'remark', title: '备注', width: 280}
+
+                ]
+            ]
+            , id: 'listData'
+
+
+        });
+
+        //执行条件查询
+        /*条件查询按钮*/
+        var $ = layui.$;
+        $('#searchBtn').on('click', function () {
+            //获取输入框
+            var demoReload = $('#demoReload');
+            //执行重载
+            table.reload('listData', {
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+                ,where: {
+                    roomNO: demoReload.val()
+                }
+
+            });
+
+        });
+
+    });
+
+</script>
+</html>

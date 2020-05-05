@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css">
+    <script src="https://www.layuicdn.com/layui/layui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+</head>
+<body>
+<form class="layui-form" th:each="g:${gc}" >
+    <div class="layui-tab"><!--最大层-->
+        <ul class="layui-tab-title"><!--内层-->
+            <li class="layui-this">客户信息</li>
+            <li>紧急联系人信息</li>
+        </ul>
+        <div class="layui-tab-content">
+            <!--客户信息-->
+            <div class="layui-tab-item layui-show">
+                <input th:type="hidden" th:value="${g.clientmessageid}" th:name="clientmessageid">
+
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">姓名</label>
+                    <div class="layui-input-block">
+                        <input th:type="text" th:name="clientname" th:value="${g.clientname}"    class="layui-input" disabled="disabled">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">电话</label>
+                    <div class="layui-input-inline">
+                        <input th:type="tel" th:name="phone" th:value="${g.phone}"  lay-verify="required|phone"  class="layui-input" disabled="disabled">
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">客户类型</label>
+                    <div class="layui-input-block">
+                        <select th:name="clienttype" lay-filter="aihao" disabled="disabled">
+                            <opion  th:value="${g.clienttype}" th:text="${g.clienttype}" selected="" disabled="disabled"></opion>
+                            <option value="业主">业主</option>
+
+
+
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">证件类型</label>
+                    <div class="layui-input-block">
+                        <select th:name="certificatetype" lay-filter="aihao" disabled="disabled">
+                            <opion  th:value="${g.certificatetype}" th:text="${g.certificatetype}" selected="" disabled="disabled"></opion>
+                            <option value="身份证">身份证</option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">证件号</label>
+                    <div class="layui-input-block">
+                        <input th:type="text" th:name="certificateno" th:value="${g.certificateno}"  lay-verify="identity" placeholder="" autocomplete="off" class="layui-input" disabled="disabled">
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">性别</label>
+                    <div class="layui-input-block" th:if="${g.gender == '男'}">
+                        <input th:type="radio" th:name="gender" th:value="男" title="男" checked disabled="disabled">
+                        <input th:type="radio" th:name="gender" th:value="女" title="女" disabled="disabled">
+                    </div>
+                    <div class="layui-input-block" th:if="${g.gender == '女'}">
+                        <input th:type="radio" th:name="gender" th:value="男" title="男" disabled="disabled">
+                        <input th:type="radio" th:name="gender" th:value="女" title="女" checked disabled="disabled">
+                    </div>
+                </div>
+
+
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">民族</label>
+                    <div class="layui-input-block">
+                        <select th:name="nation" lay-filter="aihao" disabled="disabled">
+                            <option th:value="${g.nation}" th:text="${g.nation}" selected="" disabled="disabled"> </option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">家庭住址</label>
+                    <div class="layui-input-block">
+                        <textarea  th:name="natives" th:text="${g.natives}"class="layui-textarea" th:disabled="disabled"></textarea>
+                    </div>
+                </div>
+
+
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">教育程度</label>
+                    <div class="layui-input-block">
+                        <select th:name="educationid" lay-filter="aihao" disabled="disabled">
+                            <option th:each="e:${ge}" th:value="${e.educationid}" th:text="${e.education}" th:selected="${g.educationid == e.educationid}" th:disabled="disabled"></option>
+
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">开户行</label>
+                    <div class="layui-input-block">
+                        <select th:name="bankid" lay-filter="aihao" disabled="disabled">
+                            <option th:each="b:${gb}" th:value="${b.bankid}" th:text="${b.openbank}" th:selected="${g.bankid == b.bankid}" th:disabled="disabled"></option>
+
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">卡号</label>
+                    <div class="layui-input-inline">
+                        <input th:type="text" th:name="banknumber" th:value="${g.banknumber}"  class="layui-input" th:disabled="disabled">
+                    </div>
+                </div>
+
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">添加日期</label>
+                    <div class="layui-input-inline">
+                        <input th:type="text" th:name="addtime" th:value="${g.addtime}" id="date1" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" th:disabled="disabled">
+                    </div>
+                </div>
+
+
+
+            </div><!--客户信息闭合-->
+
+
+
+
+            <!--紧急联系人-->
+            <div class="layui-tab-item">
+
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">姓名</label>
+                    <div class="layui-input-block">
+                        <input th:type="text" th:name="relationname" th:value="${g.relationname}"    class="layui-input" readonly="readonly" disabled="disabled">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">电话</label>
+                    <div class="layui-input-inline">
+                        <input th:type="tel" th:name="emergencyphone" th:value="${g.emergencyphone}" lay-verify="required|phone" autocomplete="off" class="layui-input" disabled="disabled">
+                    </div>
+                </div>
+
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">家庭住址</label>
+                    <div class="layui-input-block">
+                        <textarea class="layui-textarea" th:name="address" th:text="${g.address}" th:disabled="disabled"></textarea>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">工作单位</label>
+                    <div class="layui-input-block">
+                        <input th:type="text" th:name="company" th:value="${g.company}"  lay-verify="title"  class="layui-input" disabled="disabled">
+                    </div>
+                </div>
+
+
+
+
+            </div><!--紧急联系人闭合-->
+
+        </div><!--内层-->
+
+    </div><!--最大层-->
+
+</form>
+<script type="text/javascript">
+    layui.use(['form', 'layer', 'laydate','element'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,laydate = layui.laydate
+            ,element = layui.element
+            ,$=layui.jquery;
+        //日期
+        laydate.render({
+            elem: '#date',
+            trigger:'click'
+        });
+        laydate.render({
+            elem: '#date1',
+            trigger:'click'
+        });
+        //监听提交
+        form.on('submit(tijiao)', function(data){
+            //data.field表单所有信息
+            $.post("upClient",data.field,function(result)
+                {
+                    if(result.data==false){
+                        layer.msg(result.msg, {
+                            icon: 1,
+                            time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                        })
+
+                    }
+                    else {
+                        layer.msg(result.msg, {
+                                icon: 1,
+                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
+
+                    },
+                            function () {
+                                //刷新父页面
+                                // var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                                // parent.layer.close(index)
+                                parent.window.location.reload();
+                            });
+                    }
+                }
+            );
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

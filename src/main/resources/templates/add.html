@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加meter</title>
+</head>
+<style type="text/css">
+    #container ul{
+       margin-left:50px;
+    }
+    #container ul li{
+        float: left;
+        margin-left: 10px;
+        list-style: none;
+    }
+</style>
+<!--<link type="text/css" rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all"/>-->
+<link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css">
+<script src="https://www.layuicdn.com/layui/layui.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<body>
+<form class="layui-form">
+   <div id="container">
+       <ul>
+           <li><div class="layui-form-item">
+               <label class="layui-form-label">楼宇</label>
+               <div class="layui-input-block">
+                   <select th:name="precinct" id="precinct"  lay-filter="precinct">
+                       <option th:each="q:${query}" th:value="${q.buildingName}" th:text="${q.buildingName}"></option>
+                   </select>
+               </div>
+           </div></li>
+       </ul>
+     <ul>
+         <li><div class="layui-form-item">
+             <label class="layui-form-label">房间编号</label>
+             <div class="layui-input-block">
+                 <select th:name="homeNO"  lay-filter="RoomType" id="RoomType">
+                     <option th:each="r:${room}" th:value="${r.roomID}" th:text="${r.roomNO}"></option>
+                 </select>
+             </div>
+         </div></li>
+        <li><div class="layui-form-item">
+<!--            <label class="layui-form-label">仪表编号</label>-->
+<!--            <div class="layui-input-block">-->
+<!--                <select th:name="meterNO"  lay-filter="meterNO" id="meterNO">-->
+<!--                    <option th:each="r:${room}" th:value="${r.roomNO}" th:text="${r.roomNO}"></option>-->
+<!--                </select>-->
+<!--            </div>-->
+            <label class="layui-form-label">仪表编号</label>
+            <div class="layui-input-block">
+                <input type="text" name="meterNO" value="1-101-1"   class="layui-input">
+            </div>
+        </div></li>
+
+     </ul>
+       <ul>
+           <li><div class="layui-form-item">
+               <label class="layui-form-label">客户姓名</label>
+               <div class="layui-input-block">
+                   <input type="text" disabled name="clientName" id="clientName" placeholder="客户姓名" lay-verify="required" class="layui-input">
+               </div>
+           </div></li>
+           <li><div class="layui-form-item">
+               <label class="layui-form-label">仪表类型</label>
+               <div class="layui-input-block">
+                   <select th:name="payitemsId" th:id="roomType">
+                       <option th:each="l:${list}" th:value="${l.payitemsId}" th:text="${l.patitemsName}"></option>
+                   </select>
+               </div>
+           </div></li>
+
+       </ul>
+       <ul>
+           <li> <div class="layui-form-item">
+               <label class="layui-form-label">抄表期</label>
+               <div class="layui-inline">
+                   <input type="text" name="meterReadTime" class="layui-input test-item" lay-verify="required"  placeholder="yyyy-MM-dd">
+               </div>
+           </div></li>
+           <li><div class="layui-form-item">
+               <label class="layui-form-label">抄表结束期</label>
+               <div class="layui-inline">
+                   <input type="text" name="meterReadEndTime" class="layui-input test-item" lay-verify="required"  placeholder="yyyy-MM-dd">
+               </div>
+           </div></li>
+
+       </ul>
+       <ul>
+           <li><div class="layui-form-item">
+               <label class="layui-form-label">上次指数</label>
+               <div class="layui-input-block">
+                   <input type="text" name="lastIndex" id="lastIndex" placeholder="请输入上次指数" lay-verify="required"  class="layui-input">
+               </div>
+           </div></li>
+           <li><div class="layui-form-item">
+               <label class="layui-form-label">本次指数</label>
+               <div class="layui-input-block">
+                   <input type="text" name="atIndex" id="atIndex" placeholder="请输入本次指数" lay-verify="required"  class="layui-input">
+               </div>
+           </div></li>
+
+       </ul>
+       <ul>
+         <!--  <li><div class="layui-form-item">
+               <label class="layui-form-label">附加量</label>
+               <div class="layui-input-block">
+                   <input type="text" name="additional" id="additional" placeholder="请输入附加量" lay-verify="required" class="layui-input">
+               </div>
+           </div></li>-->
+           <li><div class="layui-form-item">
+               <label class="layui-form-label">实用量</label>
+               <div class="layui-input-block">
+                   <input type="text" name="utility" id="utility" placeholder="请输入实用量" lay-verify="required"  class="layui-input" readonly>
+               </div>
+           </div></li>
+
+       </ul>
+       <ul>
+           <li><div class="layui-form-item">
+               <label class="layui-form-label">抄表类型</label>
+               <div class="layui-input-block">
+                   <select th:name="meterReadType" >
+                       <option value="正常" >正常</option>
+                       <option value="异常">异常</option>
+                   </select>
+               </div>
+           </div></li>
+           <li><div class="layui-form-item">
+               <label class="layui-form-label">收费标准</label>
+               <div class="layui-input-block">
+                   <select th:name="payitemstId" >
+                       <option th:each="p:${pt}" th:value="${p.payitemstId}" th:text="${p.patitemstName}"></option>
+                   </select>
+               </div>
+           </div></li>
+       </ul>
+       <ul>
+           <li><div class="layui-form-item">
+               <label class="layui-form-label">抄表日期</label>
+               <div class="layui-inline">
+                   <input type="text" name="meterReadDate" class="layui-input test-item" lay-verify="required"  placeholder="yyyy-MM-dd" autocomplete="off" >
+                   <span class="testView"></span>
+               </div>
+           </div></li>
+           <li><div class="layui-form-item">
+               <label class="layui-form-label">抄表人</label>
+               <div class="layui-input-block">
+                   <input type="text" name="meterReader" id="meterReader" placeholder="请输入抄表人" lay-verify="required" class="layui-input">
+               </div>
+           </div></li>
+       </ul>
+       <ul>
+           <li><div class="layui-form-item  layui-form-text">
+               <label class="layui-form-label">备注</label>
+               <div class="layui-input-block">
+                   <textarea name="remark" id="remark" placeholder="请输入备注" class="layui-textarea"></textarea>
+               </div>
+           </div></li>
+       </ul>
+   </div>
+
+   <div style="margin-left: 210px; clear: both;">
+        <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="tijiao">提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+
+</form>
+
+<script type="text/javascript" th:src="@{/layui/layui.all.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery-2.1.3.min.js}"></script>
+<script>
+    $("#atIndex").blur(function () {
+      // $("#utility").val(parseInt($("#atIndex").val())-parseInt($("#lastIndex").val()));
+       var lastNumber=parseInt($("#lastIndex").val());
+       var currNumber=parseInt($("#atIndex").val());
+
+       if(currNumber<lastNumber){
+           layer.alert("指数有误请仔细核对！");
+           $("#atIndex").val("");
+       }else{
+           $("#utility").val(currNumber-lastNumber);
+       }
+    });
+
+</script>
+<script type="text/javascript">
+    layui.use(['form', 'layer', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,laydate = layui.laydate
+            ,$=layui.jquery;//定义$
+
+        lay('.test-item').each(function(){
+            laydate.render({
+                elem: this
+                ,format:'yyyy-MM-dd'
+                ,type:'date'
+                ,trigger: 'click'
+            });
+        });
+
+       form.on('select(RoomType)', function(data){
+            $.post("selMessageID",{'MessageID':data.value},function(result){
+                    $("#clientName").val(result.msg);
+            }
+            );
+           $.post("selMax",{'practicalID':data.value},function(result){
+                   $("#lastIndex").val(result.count);
+               }
+           );
+
+        });
+
+
+
+        //监听提交
+        form.on('submit(tijiao)', function(data){
+            //data.field表单所有信息
+              if(parseInt($("#lastIndex").val())>parseInt($("#atIndex").val())){
+                alert("本次抄表指数与上次指数冲突！") ;
+                $("#atIndex").focus();
+                return false;
+            } else {
+                $.post("add_do",data.field,function(result)
+                    {
+                        layer.msg(result.msg, {
+                            icon: 1,
+                            time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                        }, function(){
+                            //刷新父页面
+                            parent.window.location.reload();
+                        });
+                    }
+                );
+            }
+            //阻止form表单提交
+            return false;
+        });
+
+    });
+</script>
+
+</body>
+</html>

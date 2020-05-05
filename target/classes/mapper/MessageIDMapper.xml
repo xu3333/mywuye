@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhan.mapper.MessageIDMapper">
+
+    <select id="selMessageID" parameterType="Integer" resultType="RoomType">
+          select clientmessageId from room where roomID=#{roomID}
+    </select>
+    <select id="selclientName" parameterType="Integer" resultType="RoomType">
+          select clientName from clientmessage where clientmessageId=#{clientmessageId}
+    </select>
+    <select id="selectMax" parameterType="Integer" resultType="RoomType">
+          select practical from bill where roomID=#{roomID}
+    </select>
+</mapper>

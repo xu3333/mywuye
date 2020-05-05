@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css">
+    <script src="https://www.layuicdn.com/layui/layui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<form class="layui-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">楼号</label>
+        <div class="layui-input-block">
+            <input type="text" name="buildingname" id="name" lay-verify="title" autocomplete="off"  class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">总楼层</label>
+        <div class="layui-input-block">
+            <input type="text" name="loucengcount" id="lc"   class="layui-input" onkeyup="value=zhzs(this.value)" lay-verify="required|number">
+        </div>
+    </div>
+
+    <div style="margin-left: 210px">
+        <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="tijiao">提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+</form>
+
+</body>
+
+<script type="text/javascript" th:src="@{/js/layui.all.js}"></script>
+<script type="text/javascript">
+    layui.use(['form', 'layer', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,laydate = layui.laydate
+            ,$=layui.jquery//定义$
+        //监听提交
+        form.on('submit(tijiao)', function(data){
+            //data.field表单所有信息
+            if($("#name").val()==""){
+                alert("单元不能为空！") ;
+                return false;
+            }
+            if($("#lc").val()==""){
+                alert("楼层不能为空！") ;
+                return false;
+            }
+            else {
+                $.post("addLou",data.field,function(result)
+                    {
+                       if(result.data==false){
+                           layer.msg(result.msg, {
+                               icon: 1,
+                               time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                           })
+
+                       }
+                      else {
+                           layer.msg(result.msg, {
+                                   icon: 1,
+                                   time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                               },
+
+                               function () {
+                                   //刷新父页面
+                                   parent.window.location.reload();
+                               });
+                       }
+                    }
+                );
+            }
+            //阻止form表单提交
+            return false;
+        });
+        //重置清空文本框
+        $("#reset").click(function () {
+            $("#name").val("");
+            $("#lc").val("");
+            form.render();
+
+        })
+
+    });
+</script>
+</html>

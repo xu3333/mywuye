@@ -1,0 +1,41 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yunhan.mapper.MeterChargeMapper">
+    <select id="selAll" resultType="map" parameterType="map">
+        select m.meterID,m.clientName,m.auditStatus,m.meterReadTime,m.utility,m.meterReadStatus,m.remark,p.patitemsName,p.payitemsmoney,r.roomID,r.roomNo
+        from meter m,payitems p,room r
+        <where>m.payitemsId=p.payitemsId and m.homeNO=r.roomID
+            <if test="clientName!=null and clientName!=''">
+               and m.clientName like concat('%',concat(#{clientName},'%'))
+           </if>ORDER BY m.meterID LIMIT #{begin},#{end}
+       </where>
+    </select>
+    <select id="selCount" resultType="int">
+        select count(*) from meter
+    </select>
+    <!--审核一行-->
+    <update id="update_do" parameterType="int">
+         update meter set auditStatus=1 where meterID=#{meterID}
+    </update>
+    <!--审核多行-->
+    <update id="updateAll_do" parameterType="Integer[]">
+          update meter set auditStatus=0 where meterID in
+          <foreach collection="array" open="(" item="meterID" separator="," close=")">
+              #{meterID}
+          </foreach>
+    </update>
+    <!--撤销审核-->
+   <!-- <update id="updateReAudit_do" parameterType="int">
+        update meter set auditStatus=0 where meterID=#{meterID}
+    </update>-->
+    <!--开启抄表-->
+   <update id="update_true" parameterType="int">
+         update meter set meterReadStatus='true' where meterID=#{meterID}
+    </update>
+    <!--关闭抄表-->
+    <update id="update_false" parameterType="int">
+         update meter set meterReadStatus='false' where meterID=#{meterID}
+    </update>
+</mapper>

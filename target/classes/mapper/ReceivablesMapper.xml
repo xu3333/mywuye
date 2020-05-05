@@ -1,0 +1,17 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yunhan.mapper.ReceivablesMapper">
+    <select id="selectAll" resultType="map" parameterType="map">
+        select r.roomNO,r.roomArea,b.endtime,b.payproject,b.practical,b.price,b.assessment,b.remark,c.clientName,c.phone,bl.buildingName
+        from room r,bill b,clientmessage c,louceng l,building bl,meter m
+        <where> r.roomID=b.roomID and m.homeNO=r.roomID  and r.clientMessageId=c.clientMessageId and r.loucengID=l.loucengID and l.buildingID=bl.buildingID and m.auditStatus=1 and b.assessment!=0
+            <if test="roomNO!=null and roomNO!=''">
+                and r.roomNO like concat('%',concat(#{roomNO},'%'))
+            </if>
+        </where>
+        order by r.roomNO LIMIT #{begin},#{end}
+    </select>
+
+</mapper>

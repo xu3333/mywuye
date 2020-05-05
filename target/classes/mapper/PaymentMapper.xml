@@ -1,0 +1,32 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhan.mapper.PaymentMapper">
+    <select id="sell"  resultType="map" parameterType="map">
+        select r.roomID,r.roomNo,c.clientname,f.assessment,f.balance,f.collectDate,f.tollgatherer,f.paymentType,f.fremark from room r
+        LEFT JOIN clientMessage c on c.clientMessageId=r.clientMessageId
+        LEFT JOIN feecontent f on f.clientMessageId=c.clientMessageId
+        <where>1=1
+            <if test="clientname!=null and clientname!=''">
+                and c.clientname like concat('%',concat(#{clientname},'%'))
+            </if>
+        </where>LIMIT #{begin},#{end}
+    </select>
+    <select id="sellCount" resultType="int">
+        select count(*) from room r LEFT JOIN clientMessage c on c.clientMessageId=r.clientMessageId
+        LEFT JOIN feecontent f on f.clientMessageId=c.clientMessageId
+        <where>1=1
+            <if test="clientname!=null and clientname!=''">
+                and clientname like concat('%',concat(#{clientname},'%'))
+            </if>
+        </where>
+    </select>
+    <select id="selOne" parameterType="int" resultType="Payment">
+select r.roomid,r.roomno,c.clientname,f.assessment,f.balance,f.collectDate,f.tollgatherer,f.paymentType,f.fremark from room r LEFT JOIN clientMessage c on c.clientMessageId=r.clientMessageId
+        LEFT JOIN feecontent f on f.clientMessageId=c.clientMessageId where roomid=#{roomid}
+    </select>
+    <update id="updates" parameterType="Payment">
+       update feecontent set paymentType=#{paymenttype},collectDate=#{collectdate},tollgatherer=#{tollgatherer},fremark=#{fremark}
+        where clientMessageId=(select clientMessageId from clientmessage where clientname=#{clientname})
+    </update>
+</mapper>

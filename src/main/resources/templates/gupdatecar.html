@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css">
+    <script src="https://www.layuicdn.com/layui/layui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/layui.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/layer.css}"/>
+</head>
+<body>
+<form class="layui-form" th:each="s:${sc}">
+    <input type="hidden" th:name="carportid" th:value="${s.carportid}">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">车位号</label>
+        <div class="layui-input-block">
+            <input type="text" name="carportno" th:value="${s.carportno}" id="name" lay-verify="title" autocomplete="off"  class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">车位类型</label>
+        <div class="layui-input-block">
+            <select th:name="carporttid" lay-filter="aihao">
+                <option th:each="c:${ss}" th:value="${c.carporttid}" th:text="${c.carporttname}" th:selected="${s.carporttid == c.carporttid}"></option>
+
+            </select>
+        </div>
+    </div>
+    <div style="margin-left: 210px">
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="tijiao">提交</button>
+    </div>
+
+</form>
+<script type="text/javascript">
+    layui.use(['form', 'layer', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,laydate = layui.laydate
+            ,$=layui.jquery;
+        //监听提交
+        form.on('submit(tijiao)', function(data){
+            //data.field表单所有信息
+            $.post("UpCar",data.field,function(result)
+                {
+                    if(result.data==false){
+                        layer.msg(result.msg, {
+                            icon: 1,
+                            time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                        })
+
+                    }
+                    else {
+                        layer.msg(result.msg, {
+                                icon: 1,
+                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                            },
+
+                            function () {
+                                //刷新父页面
+                                parent.window.location.reload();
+                            });
+                    }
+                }
+            );
+            return false;
+        });
+    });
+</script>
+
+</body>
+</html>

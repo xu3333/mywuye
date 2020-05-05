@@ -1,0 +1,54 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yunhan.mapper.GmdLouMapper">
+    <select id="selectAll" parameterType="map" resultType="map">
+        select * from building
+
+        <where>
+
+            <if test="buildingname!=null and buildingname!=''">
+                and buildingname like concat('%',concat(#{buildingname},'%'))
+            </if>
+        </where>LIMIT #{begin},#{end}
+    </select>
+    <select id="selectCount" resultType="int">
+        select count(*) from building
+        <where>
+            <if test="buildingname!=null and buildingname!=''">
+                and buildingname like concat('%',concat(#{buildingname},'%'))
+            </if>
+        </where>
+    </select>
+        <!--启用-->
+    <update id="delLou" parameterType="int">
+    update building set buildingStatus=1 where buildingid=#{buildingid}
+    </update>
+    <!--禁用-->
+    <update id="delqLou" parameterType="int">
+    update building set buildingStatus=0 where buildingid=#{buildingid}
+    </update>
+
+    <!--添加楼盘与楼层-->
+        <insert id="addLou" parameterType="GmdLou">
+            insert into building(buildingName,itemsid,loucengCount,buildingStatus)values(#{buildingname},1,#{loucengcount},0);
+        </insert>
+    <!--添加时查询单元号是否已存在-->
+
+    <select id="selAddlou" parameterType="String" resultType="int">
+    select count(buildingName) from building where buildingName=#{buildingname}
+    </select>
+<!--修改时查询-->
+    <select id="selbuildingid" parameterType="GmdLou" resultType="GmdLou">
+           select * from building where buildingID=#{buildingid}
+
+    </select>
+    <!--执行修改-->
+    <update id="upLou" parameterType="GmdLou">
+        update building set buildingName=#{buildingname},loucengCount=#{loucengcount} where buildingID=#{buildingid}
+
+    </update>
+
+
+</mapper>

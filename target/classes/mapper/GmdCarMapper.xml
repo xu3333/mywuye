@@ -1,0 +1,96 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yunhan.mapper.GmdCarMapper">
+    <select id="selectAllcar" parameterType="map" resultType="map">
+
+
+        select * from carport c left join clientMessage cm on c.carportID=cm.carportID LEFT JOIN room r ON
+        r.clientMessageId=cm.clientMessageId
+        <where>
+            <if test="clientname!=null and clientname!=''">
+                and cm.clientname like concat('%',concat(#{clientname},'%'))
+            </if>
+        </where> LIMIT #{begin},#{end}
+    </select>
+    <select id="selectCountcar" resultType="int">
+    select count(*) from clientMessage
+        <where>1=1
+            <if test="clientname!=null and clientname!=''">
+                and clientname like concat('%',concat(#{clientname},'%'))
+            </if>
+        </where>
+    </select>
+    <!--通过id执行删除时修改状态-->
+    <update id="delCar" parameterType="int">
+         update carport set cartportStatus=2 where carportid=#{carportid}
+    </update>
+    <update id="delqCar" parameterType="int">
+         update carport set cartportStatus=0 where carportid=#{carportid}
+    </update>
+    <!--查询车位类型表-->
+    <select id="selCarportT" parameterType="GmdCar" resultType="GmdCar">
+            select * from carportT
+    </select>
+
+    <insert id="addCar" parameterType="GmdCar">
+        insert into carport(carportNo,carportTid,cartportStatus)VALUES(#{carportno},#{carporttid},0);
+    </insert>
+    <!--添加时判断是否已存在-->
+    <select id="selAddcar" parameterType="String" resultType="int">
+            select count(carportNo) from carport where carportNo=#{carportno}
+    </select>
+    <!--修改时查询-->
+    <select id="selcUp" parameterType="int" resultType="GmdCar">
+        select * from carport where carportID=#{carportid}
+    </select>
+    <!--执行修改-->
+    <update id="UpCar" parameterType="GmdCar">
+        update carport set carportNo=#{carportno},carportTid=#{carporttid} where carportID=#{carportid}
+
+    </update>
+    <!--修改时查询-->
+    <select id="selBtncar" parameterType="int" resultType="GmdCar">
+
+ select * from carport c left join clientMessage cm on c.carportID=cm.carportID LEFT JOIN room r ON
+        r.clientMessageId=cm.clientMessageId where   c.carportID=#{carportid}
+    </select>
+
+    <!--查询房间-->
+    <select id="selRc" resultType="GmdCar">
+        select * from room  where houseState=1
+    </select>
+
+    <!--通过房间id查询客户-->
+    <select id="selC" parameterType="String" resultType="GmdCar">
+         select c.clientname from room r LEFT JOIN clientMessage c on c.clientMessageId=r.clientMessageId where r.roomno=#{roomno}
+
+    </select>
+
+    <!--执行车位绑定-->
+    <update id="upBtn" parameterType="GmdCar">
+        update room set roomNo=#{roomno},clientMessageId=(select clientmessageid  from clientMessage where clientname=#{clientname})where roomno=#{roomno}
+
+    </update>
+
+    <update id="upBtncar" parameterType="GmdCar">
+        update clientMessage set carportID=#{carportid} where clientname=#{clientname}
+
+    </update>
+
+
+    <!--修改车位信息-->
+    <update id="upCarp" parameterType="int">
+        update carport set cartportStatus=1 where carportID=#{carportid}
+    </update>
+
+    <update id="upcCarp" parameterType="GmdCar">
+       update carport set cbeginTime=#{cbegintime},cendTime=#{cendtime} where carportID=#{carportid}
+    </update>
+    <!--点击提交时把客户状态恢复未使用状态-->
+    <update id="upWei" parameterType="GmdCar">
+        update carport set cartportStatus=0,cbeginTime=null,cendTime=null
+         where carportID=(select carportID from clientMessage where clientname=#{clientname})
+    </update>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhan.mapper.WXPriceMapper">
+    <select id="searchList" resultType="WXPrice" parameterType="WXPrice">
+select r.clientMessageId,b.roomID,r.roomNo,b.endtime,c.clientname,b.assessment,b.payproject from bill b,room r,clientmessage c,meter m
+where b.roomID=r.roomID and r.clientMessageId=c.clientMessageId and b.roomID=m.homeNO and b.assessment!=0 and m.auditStatus=1
+   and r.roomNo like concat('%',concat(#{roomNo},'%'))
+    </select>
+    <update id="updateFee" parameterType="WXPrice">
+        update bill set assessment=0 where roomID=#{roomID} and payproject=#{payproject}
+    </update>
+    <insert id="addPayType" parameterType="WXPrice">
+    INSERT into feecontent(clientMessageId,assessment,paymentType,collectDate,tollgatherer)VALUES(
+    (select clientMessageId from clientmessage where clientname=#{clientname}),#{assessment},'微信','2019-11-21','系统123')
+    </insert>
+</mapper>

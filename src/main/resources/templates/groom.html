@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>表格</title>
+
+    <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css">
+    <script src="https://www.layuicdn.com/layui/layui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+</head>
+<style>
+</style>
+<body>
+<div class="demoTable">
+搜索客户姓名：
+<div class="layui-inline">
+    <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+</div>
+<button class="layui-btn" data-type="reload" id="searchBtn">搜索</button>
+<button class="layui-btn" data-type="reload" id="addBtn">添加</button>
+    <button class="layui-btn" data-type="reload" id="qxBtn">查看全部</button>
+
+</div>
+
+<table class="layui-hide" id="demo" lay-filter="test"></table>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
+    {{# if(d.houseState == 0){ }}
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="editBtn">添加户主</a>
+    {{# } }}
+</script>
+
+
+
+
+<script>
+    layui.use([ 'laypage', 'layer', 'table'], function() {
+        var laypage = layui.laypage //分页
+            , layer = layui.layer //弹层
+            , table = layui.table;//表格
+
+
+        //执行一个 table 实例
+        table.render({
+            elem: '#demo'
+            , height: 550
+            , url: 'glistData' //数据接口
+            , title: '用户表'
+            , page: true //开启分页
+            , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板
+            , totalRow: true //开启合计行
+            , limits: [5, 10, 15]
+
+            , cols: [
+                [ //表头
+                    {type: 'checkbox', fixed: 'left'}
+                    , {field: 'roomID', title: '编号', width: 80, sort: true}
+                    ,{field: 'roomNo', title: '房间编号', width:150}
+                    ,{field: 'clientname', title: '客户姓名', width: 90, sort: true}
+                    ,{field: 'phone', title: '电话', width:150, sort: true}
+                    ,{field: 'certificateType', title: '证件类型', width:150}
+                    ,{field: 'certificateNo', title: '证件号码', width: 90, sort: true}
+                    ,{field: 'buildingName', title: '楼号', width:150}
+                    ,{field: 'loucengNO', title: '楼层', width: 90, sort: true}
+                    ,{field: 'roomArea', title: '建筑面积', width:150, sort: true}
+                    ,{field: 'itemsname', title: '收费方案', width:150}
+                    ,{field: 'houseType', title: '户型', width: 90, sort: true}
+                    ,{field: 'finish', title: '装修', width:150, sort: true}
+                    ,{field: 'houseState', title: '房间状态', width:150}
+                    ,{field: 'carportNo', title: '车库编号', width:150, sort: true}
+                    ,{field: 'addTime', title: '添加日期', width:150}
+                    , {fixed: 'right', width: 200, align: 'center', toolbar: '#barDemo'}
+                ]
+            ]
+            , id: 'glistData',
+            done:function (res,curr,count) {
+                $("[data-field='houseState']").children().each(function () {
+                    if ($(this).text() == 0) {
+                        $(this).text('未入住');
+                    }
+                    if ($(this).text() == 1) {
+                        $(this).text('已入住');
+
+                    }
+
+                });
+            }
+        });
+        //监听行工具事件
+        table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data //获得当前行数据
+                ,layEvent = obj.event; //获得 lay-event 对应的值
+            //修改
+            if(layEvent === 'edit'){
+                layer.open({
+                    type: 2, //layer的5种层类型   0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                    title: ['修改数据', 'font-size:18px;'],  //弹出框标题
+                    shade: [0.5, '#393D49'],     //遮罩层
+                    shadeClose:true,          //点击遮罩层外区域关闭遮罩层
+                    area: ['580px', '500px'],    //弹出框大小
+                    anim: 1,              //弹出动画
+                    content:'upSel?roomid='+data.roomID,
+                    end:function () {
+                        //刷新父页面
+                        location.reload();
+                    }
+
+                });
+            }
+            //用户入住
+            if(layEvent === 'editBtn'){
+                layer.open({
+                    type: 2, //layer的5种层类型   0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                    title: ['修改数据', 'font-size:18px;'],  //弹出框标题
+                    shade: [0.5, '#393D49'],     //遮罩层
+                    shadeClose:true,          //点击遮罩层外区域关闭遮罩层
+                    area: ['580px', '500px'],    //弹出框大小
+                    anim: 1,              //弹出动画
+                    content:'addSel?roomid='+data.roomID
+                });
+            }
+            //删除
+            if(layEvent === 'del'){
+                //操作
+                layer.confirm('真的要删除吗？', function () {
+                    $.post("delRoom",{'roomid':data.roomID},function(result)
+                        {
+                            layer.msg(
+                                result.msg, {
+                                    icon: 1,
+                                    time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                                }, function(){
+                                    //刷新父页面
+                                    //parent.window.location.reload();
+                                    obj.del();
+                                    layer.close(index);
+
+                                });
+                        }
+                    );
+                });
+            }
+        });
+        //分页
+        laypage.render({
+            elem: 'pageDemo' //分页容器的id
+            , count: 100 //总页数
+            , skin: '#1E9FFF' //自定义选中色值
+            //,skip: true //开启跳页
+            , jump: function (obj, first) {
+                if (!first) {
+                    layer.msg('第' + obj.curr + '页', {offset: 'b'});
+                }
+            }
+        });
+
+        //执行条件查询
+        /*条件查询按钮*/
+        var $ = layui.$;
+        $('#searchBtn').on('click', function () {
+            //获取输入框
+            var demoReload = $('#demoReload');
+            //执行重载
+            table.reload('glistData', {
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+                , where: {
+                    clientname: demoReload.val()
+                }
+            });
+        });
+        //新增
+        $("#addBtn").on('click',function () {
+            top.layer.open({
+                type:2,      //layer的5种层类型   0（信息框，默认）、1（页面层）、2（iframe层）、3（加载层）、4（tips层）
+                title: ['新增', 'font-size:18px;'],  //弹出框标题
+                area: ['800px','550px'],    //设置弹框的大小
+                shadeClose:true,          //点击遮罩层外区域关闭遮罩层
+                anim: 2,              //弹出动画
+                content:'addroom', //写方法的路径  进入页面  此处也和easyui相同
+                end:function () {
+                    //刷新父页面
+                    location.reload();
+                }
+            })
+        })
+        //    取消查询
+        var $ = layui.$;
+        $('#qxBtn').on('click', function(){
+            window.location.reload();
+        });
+
+    });
+
+
+
+</script>
+
+</body>
+</html>

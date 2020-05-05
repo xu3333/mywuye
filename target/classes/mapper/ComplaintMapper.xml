@@ -1,0 +1,50 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yunhan.mapper.ComplaintMapper">
+
+    <select id="selectAll" resultType="map" parameterType="map" >
+        select * from complaintSuggestion c left join room r on c.roomid=r.roomID
+    <where>1=1
+        <if test="complainant!=null and complainant!=''">
+             and c.complainant like concat('%',concat(#{complainant},'%'))
+         </if>
+    </where>LIMIT #{begin},#{end}
+   </select>
+   <select id="selectCount" resultType="int">
+       select count(*) from complaintsuggestion
+       <where>1=1
+            <if test="complainant!=null and complainant!=''">
+                and complainant like concat('%',concat(#{complainant},'%'))
+            </if>
+       </where>
+   </select>
+   <insert id="add_do2" parameterType="ComplaintSuggestion">
+        insert into complaintSuggestion (complaintsuggestionid,roomid,complainant,complainantnumber,complainanttype,complainanttime,complainanteventdescription,complainantprocessingstate,
+	      dealingwithpeople,dealingwithtime,dealingwithremarks,visitor,revisitdays,returnnotes,degreeofsatisfaction,finishedstate) values (null,#{roomid},#{complainant},#{complainantnumber},
+	        #{complainanttype},#{complainanttime},#{complainanteventdescription},#{complainantprocessingstate},#{dealingwithpeople},#{dealingwithtime},#{dealingwithremarks},#{visitor},#{revisitdays},
+	          #{returnnotes},#{degreeofsatisfaction},#{finishedstate});
+   </insert>
+   <select id="selectComplaintSuggestionById" parameterType="int" resultType="ComplaintSuggestion">
+       select * from complaintSuggestion c left join room r on c.roomid=r.roomID where complaintSuggestionId=#{complaintsuggestionid}
+    </select>
+    <update id="updateComplaint" parameterType="ComplaintSuggestion">
+         update complaintsuggestion set complainantProcessingState=0,finishedstate=0,dealingwithremarks=#{dealingwithremarks},dealingWithPeople=#{dealingwithpeople},dealingWithTime=NOW() where complaintSuggestionId=#{complaintsuggestionid}
+    </update>
+    <select id="selectComplaintSuggestionById2" parameterType="int" resultType="ComplaintSuggestion">
+       select * from complaintSuggestion c left join room r on c.roomid=r.roomID where complaintSuggestionId=#{complaintsuggestionid}
+    </select>
+    <update id="updateComplaint2" parameterType="ComplaintSuggestion">
+         update complaintsuggestion set complainantProcessingState=1,degreeofsatisfaction=#{degreeofsatisfaction},returnNotes=#{returnnotes},finishedstate=0,revisitDays=NOW(),visitor=#{visitor} where complaintSuggestionId=#{complaintsuggestionid}
+    </update>
+    <delete id="delete2" parameterType="Integer">
+        delete from complaintsuggestion where complaintSuggestionId=#{complaintsuggestionid}
+    </delete>
+    <select id="cselRooms" parameterType="ComplaintSuggestion" resultType="ComplaintSuggestion">
+        select * from room
+    </select>
+    <select id="selectUser" parameterType="ComplaintSuggestion" resultType="ComplaintSuggestion">
+        select * from sys_user
+    </select>
+</mapper>

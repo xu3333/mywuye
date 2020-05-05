@@ -1,0 +1,23 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhan.mapper.ArreaMapper">
+    <select id="selArea"  resultType="map" parameterType="map">
+        select y.buildingname,r.roomno,c.clientname,r.roomArea,c.phone,b.endtime,b.payproject,b.practical,b.price,b.assessment,b.remark from
+        bill b,room r,building y,louceng l,clientmessage c
+        <where> b.roomID=r.roomID and r.loucengID=l.loucengID and l.buildingID=y.buildingID and r.clientMessageId=c.clientMessageId and b.assessment >0
+            <if test="clientname!=null and clientname!=''">
+                and c.clientname like concat('%',concat(#{clientname},'%'))
+            </if>
+        </where>LIMIT #{begin},#{end}
+    </select>
+    <select id="selCount" resultType="int">
+        select count(*) from bill b,room r,building y,louceng l,clientmessage c
+        <where>b.roomID=r.roomID and r.loucengID=l.loucengID and l.buildingID=y.buildingID and r.clientMessageId=c.clientMessageId and b.assessment >0
+            <if test="clientname!=null and clientname!=''">
+                and clientname like concat('%',concat(#{clientname},'%'))
+            </if>
+        </where>
+    </select>
+</mapper>
+

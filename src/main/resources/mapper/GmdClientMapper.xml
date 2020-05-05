@@ -1,0 +1,89 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yunhan.mapper.GmdClientMapper">
+    <select id="selectAll" parameterType="map" resultType="map">
+        select * from clientMessage c left join educations e on c.educationID=e.educationID
+        left join relationmessages r on c.clientMessageId=r.clientMessageId
+        left join bank b on c.bankId=b.bankId
+
+
+        <where>c.clientStatus=0
+            <if test="clientname!=null and clientname!=''">
+                and c.clientname like concat('%',concat(#{clientname},'%'))
+            </if>
+        </where>LIMIT #{begin},#{end}
+    </select>
+    <select id="selectCount" resultType="int">
+        select count(*) from clientMessage
+        <where>1=1
+            <if test="clientname!=null and clientname!=''">
+                and clientname like concat('%',concat(#{clientname},'%'))
+            </if>
+        </where>
+
+    </select>
+    <!--查询教育程度-->
+    <select id="seleducation" parameterType="GmdClient" resultType="GmdClient">
+        select * from educations
+    </select>
+        <!--添加银行信息-->
+    <insert id="addBank" parameterType="GmdClient">
+        insert into bank(openBank,banknumber)VALUES(#{openbank},#{banknumber});
+
+    </insert>
+    <!--添加客户信息-->
+    <insert id="addClient" parameterType="GmdClient">
+        insert into clientMessage(clientname,clientType,phone,certificateType,certificateNo,gender,birthday,nation,educationID,natives,addTime,bankId,clientstatus)VALUES
+(#{clientname},#{clienttype},#{phone},#{certificatetype},#{certificateno},#{gender},#{birthday},#{nation},#{educationid},#{natives},#{addtime},
+(select MAX(bankId) from bank),0);
+
+
+
+    </insert>
+
+    <!--添加紧急联系人-->
+    <insert id="addRelat" parameterType="GmdClient">
+        insert into relationmessages(company,address,relationname,emergencyPhone,clientMessageId)VALUES(#{company},#{address},#{relationname},#{emergencyphone},
+        (select MAX(clientMessageId) from clientMessage));
+
+    </insert>
+    <!--根据客户id删除信息-->
+    <update id="delClient" parameterType="int">
+        update clientMessage set clientStatus=1 where clientMessageId=#{clientmessageid}
+
+    </update>
+
+    <!--修改时通过id查询信息-->
+        <select id="selUpClient" parameterType="int" resultType="GmdClient">
+             select * from clientMessage c left join educations e on c.educationID=e.educationID
+        left join relationmessages r on c.clientMessageId=r.clientMessageId
+        left join bank b on c.bankId=b.bankId where c.clientMessageId=#{clientmessageid}
+
+        </select>
+
+    <update id="upClient" parameterType="GmdClient">
+        update clientMessage set clientname=#{clientname},clientType=#{clienttype},phone=#{phone},certificateType=#{certificatetype},
+        certificateNo=#{certificateno},gender=#{gender},birthday=#{birthday},nation=#{nation},educationID=#{educationid},natives=#{natives},
+          addTime=#{addtime},bankId=#{bankid} where clientMessageId=#{clientmessageid}
+
+    </update>
+    <!--根据id查询银行信息-->
+    <select id="selBank" parameterType="GmdClient" resultType="GmdClient">
+        select * from bank
+    </select>
+    <!--通过id修改紧急联系人-->
+    <update id="upRelation" parameterType="GmdClient">
+        update relationmessages set company=#{company},address=#{address},relationname=#{relationname},emergencyPhone=#{emergencyphone}
+        where clientMessageId=#{clientmessageid}
+
+    </update>
+
+    <!--添加时查询用户是否已存在-->
+    <select id="selAddc" parameterType="GmdClient" resultType="int">
+        select count(clientname) from clientMessage where clientname=#{clientname}
+
+    </select>
+
+</mapper>

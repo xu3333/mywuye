@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5541ef52-aba5-4a54-9153-a69b5440d03e" name="Default" comment="创建" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/yunhan$AdminApplication.ic" NAME="AdminApplication Coverage Results" MODIFIED="1574039976300" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="yunhanmanager@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="yunhanmanager@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="yunhanmanager@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="yunhanmanager: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="yunhanmanager@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="yunhanmanager: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="sys_role: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="yunhanmanager@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="yunhanmanager: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="sys_user: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="mywuye" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="F:\Git\GitWP\物业管理系统\第四组物业管理系统\pc端源码及数据库\yunhan\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="C:\sunny\Maven\localRepository" />
+        <option name="userSettingsFile" value="C:\sunny\work\apache-maven-3.3.9\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1aEmET99xpUVpS41xpz383rOmR8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1574645326919" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../testgit/mywuye" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Idea-project\yunhan\src\main\resources\mapper" />
+      <recent name="E:\Idea-project\yunhan\src\main\resources\templates" />
+      <recent name="D:\YunHanProject\yunhan\src\main\resources\mapper" />
+      <recent name="D:\YunHanProject\yunhan\src\main\resources\static\js" />
+      <recent name="E:\Idea-project\yunhan\src\main\resources\mapper\admin" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.yunhan.mapper" />
+      <recent name="com.yunhan.service.impl" />
+      <recent name="com.yunhan.service" />
+      <recent name="com.yunhan.controller" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Idea-project\yunhan\src\main\resources\templates" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AdminApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="comadmin" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.yunhan.AdminApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file enabled="true" id="idea.log" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5541ef52-aba5-4a54-9153-a69b5440d03e" name="Default" comment="" />
+      <created>1536071928414</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1536071928414</updated>
+      <workItem from="1536071929994" duration="337000" />
+      <workItem from="1572800382170" duration="956000" />
+      <workItem from="1572801487560" duration="252000" />
+      <workItem from="1572801752986" duration="870000" />
+      <workItem from="1572802746678" duration="1039000" />
+      <workItem from="1572803791573" duration="965000" />
+      <workItem from="1572804762754" duration="524000" />
+      <workItem from="1572805292510" duration="197000" />
+      <workItem from="1572826382362" duration="5946000" />
+      <workItem from="1572832772826" duration="5919000" />
+      <workItem from="1572843726030" duration="3451000" />
+      <workItem from="1572848734892" duration="805000" />
+      <workItem from="1572849550874" duration="361000" />
+      <workItem from="1572850013217" duration="7724000" />
+      <workItem from="1572857811962" duration="418000" />
+      <workItem from="1572858321759" duration="202000" />
+      <workItem from="1572858541683" duration="34000" />
+      <workItem from="1572858637790" duration="2839000" />
+      <workItem from="1572863544796" duration="2068000" />
+      <workItem from="1572869183937" duration="1189000" />
+      <workItem from="1572871000758" duration="97000" />
+      <workItem from="1572912475836" duration="3203000" />
+      <workItem from="1572916922841" duration="530000" />
+      <workItem from="1572917457564" duration="594000" />
+      <workItem from="1572918055536" duration="45000" />
+      <workItem from="1572918159709" duration="4187000" />
+      <workItem from="1572927044605" duration="13541000" />
+      <workItem from="1572951937461" duration="4312000" />
+      <workItem from="1572999397989" duration="3601000" />
+      <workItem from="1573007159626" duration="16531000" />
+      <workItem from="1573036302544" duration="3673000" />
+      <workItem from="1573040486695" duration="1381000" />
+      <workItem from="1573098487550" duration="646000" />
+      <workItem from="1573099154493" duration="2382000" />
+      <workItem from="1573102922810" duration="5902000" />
+      <workItem from="1573375947979" duration="1245000" />
+      <workItem from="1573383769896" duration="1213000" />
+      <workItem from="1573432724749" duration="4820000" />
+      <workItem from="1573455998042" duration="4596000" />
+      <workItem from="1573606482545" duration="2468000" />
+      <workItem from="1573641316869" duration="1776000" />
+      <workItem from="1573691746686" duration="11922000" />
+      <workItem from="1573987127909" duration="2197000" />
+      <workItem from="1574035856492" duration="4592000" />
+      <workItem from="1574041211755" duration="575000" />
+      <workItem from="1574041794369" duration="7294000" />
+      <workItem from="1574059452417" duration="6879000" />
+      <workItem from="1574073827488" duration="6911000" />
+      <workItem from="1574091608950" duration="4485000" />
+      <workItem from="1574123345710" duration="2170000" />
+      <workItem from="1574126447075" duration="21031000" />
+      <workItem from="1574159357253" duration="8017000" />
+      <workItem from="1574244958972" duration="6413000" />
+      <workItem from="1574297036182" duration="10192000" />
+      <workItem from="1574641085656" duration="1495000" />
+      <workItem from="1574644943694" duration="974000" />
+      <workItem from="1574902346251" duration="785000" />
+      <workItem from="1586309018671" duration="5757000" />
+      <workItem from="1586339851164" duration="3006000" />
+      <workItem from="1586396626241" duration="7088000" />
+      <workItem from="1586504689950" duration="4626000" />
+      <workItem from="1586573547988" duration="8601000" />
+      <workItem from="1586590326002" duration="13884000" />
+      <workItem from="1586656282352" duration="4332000" />
+      <workItem from="1586685021319" duration="13352000" />
+      <workItem from="1586865301934" duration="5412000" />
+      <workItem from="1586915451786" duration="6512000" />
+      <workItem from="1586999413144" duration="4036000" />
+      <workItem from="1587125359030" duration="2846000" />
+      <workItem from="1587305032236" duration="449000" />
+      <workItem from="1587344634447" duration="3433000" />
+      <workItem from="1587368060511" duration="12752000" />
+      <workItem from="1587433055051" duration="10174000" />
+      <workItem from="1587522629222" duration="8079000" />
+      <workItem from="1587604036186" duration="10757000" />
+      <workItem from="1588154199315" duration="8810000" />
+      <workItem from="1588304663408" duration="5094000" />
+      <workItem from="1588386240835" duration="13417000" />
+      <workItem from="1588471380954" duration="21505000" />
+      <workItem from="1588560611292" duration="20775000" />
+      <workItem from="1588646634074" duration="17260000" />
+    </task>
+    <task id="LOCAL-00001" summary="加入天赐项目">
+      <created>1573105378911</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1573105378911</updated>
+    </task>
+    <task id="LOCAL-00002" summary="老王测试">
+      <created>1573609844147</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1573609844147</updated>
+    </task>
+    <task id="LOCAL-00003" summary="创建">
+      <created>1588673758818</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1588673758818</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="加入天赐项目" />
+    <MESSAGE value="老王测试" />
+    <MESSAGE value="创建" />
+    <option name="LAST_COMMIT_MESSAGE" value="创建" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="350" y="68" key="#SQL_Dialects" timestamp="1586339700225">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="350" y="68" key="#SQL_Dialects/0.0.1536.824@0.0.1536.824" timestamp="1586339700225" />
+    <state x="350" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587463920834">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="350" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1587463920834" />
+    <state x="184" y="6" key="CommitChangelistDialog2" timestamp="1588673755601">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="184" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1588673755601" />
+    <state width="254" height="195" key="DatabaseViewActions_Filter" timestamp="1586582297529">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="254" height="195" key="DatabaseViewActions_Filter/0.0.1536.824@0.0.1536.824" timestamp="1586582297529" />
+    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1588674099051">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1588674099051" />
+    <state width="1493" height="192" key="GridCell.Tab.0.bottom" timestamp="1587626274187">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="192" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587626274187" />
+    <state width="1493" height="192" key="GridCell.Tab.0.center" timestamp="1587626274187">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="192" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587626274187" />
+    <state width="1493" height="192" key="GridCell.Tab.0.left" timestamp="1587626274187">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="192" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587626274187" />
+    <state width="1493" height="192" key="GridCell.Tab.0.right" timestamp="1587626274187">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="192" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587626274187" />
+    <state width="1493" height="192" key="GridCell.Tab.1.bottom" timestamp="1587626274188">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="192" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587626274188" />
+    <state width="1493" height="192" key="GridCell.Tab.1.center" timestamp="1587626274187">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="192" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1587626274187" />
+    <state width="1493" height="192" key="GridCell.Tab.1.left" timestamp="1587626274187">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="192" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1587626274187" />
+    <state width="1493" height="192" key="GridCell.Tab.1.right" timestamp="1587626274187">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="192" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1587626274187" />
+    <state width="1493" height="192" key="GridCell.Tab.2.bottom" timestamp="1587626274188">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="192" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587626274188" />
+    <state width="1493" height="192" key="GridCell.Tab.2.center" timestamp="1587626274188">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="192" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1587626274188" />
+    <state width="1493" height="192" key="GridCell.Tab.2.left" timestamp="1587626274188">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="192" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1587626274188" />
+    <state width="1493" height="192" key="GridCell.Tab.2.right" timestamp="1587626274188">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="192" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1587626274188" />
+    <state width="212" height="477" key="HiddenNamespacesPopup" timestamp="1586581056171">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="212" height="477" key="HiddenNamespacesPopup/0.0.1536.824@0.0.1536.824" timestamp="1586581056171" />
+    <state x="258" y="51" key="SettingsEditor" timestamp="1586580988014">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="258" y="51" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586580988014" />
+    <state x="349" y="68" key="com.intellij.database.dbimport.ImportDialog" timestamp="1586581234384">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="349" y="68" key="com.intellij.database.dbimport.ImportDialog/0.0.1536.824@0.0.1536.824" timestamp="1586581234384" />
+    <state x="499" y="218" key="com.intellij.database.dbimport.ImportUtil.MyDialog" timestamp="1587386098298">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="218" key="com.intellij.database.dbimport.ImportUtil.MyDialog/0.0.1536.824@0.0.1536.824" timestamp="1587386098298" />
+    <state x="457" y="0" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1586581301018">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="457" y="0" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1586581301018" />
+    <state x="437" y="233" key="com.intellij.ide.util.TipDialog" timestamp="1588646694907">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="437" y="233" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1588646694907" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1586870467510">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1586870467510" />
+    <state x="418" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1586341114061">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="418" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1586341114061" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/yunhan/controller/YaddchargeController.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

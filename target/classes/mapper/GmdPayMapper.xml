@@ -1,0 +1,66 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yunhan.mapper.GmdPayMapper">
+    <select id="selectAll" parameterType="map" resultType="map">
+        select * from payitems p left join metert m on p.metertID=m.metertID
+        left join payitemst pt on p.payitemstId=pt.payitemstId
+        left join  items i on i.itemsid=p.itemsid
+        <where>payitemsstatus=0
+            <if test="patitemstname!=null and patitemstname!=''">
+                and pt.patitemstname like concat('%',concat(#{patitemstname},'%'))
+            </if>
+        </where>LIMIT #{begin},#{end}
+    </select>
+    <select id="selectCount" resultType="int">
+        select count(*) from payitemst
+        <where>1=1
+            <if test="patitemstname!=null and patitemstname!=''">
+                and patitemstname like concat('%',concat(#{patitemstname},'%'))
+            </if>
+        </where>
+    </select>
+
+<!--删除时修改id为1-->
+    <update id="delPay" parameterType="int">
+        update payitems set payitemsstatus=1 where payitemsid=#{payitemsid}
+    </update>
+
+    <!--查询仪表信息-->
+    <select id="selMetert" parameterType="GmdPay" resultType="GmdPay">
+        select * from meterT
+    </select>
+    <!--查询项目类型信息-->
+    <select id="selPayitemst" parameterType="GmdPay" resultType="GmdPay">
+        select * from payitemst
+    </select>
+    <!--查询标准方案信息-->
+    <select id="selItems" parameterType="GmdPay" resultType="GmdPay">
+        select * from items
+    </select>
+    <!--添加方案信息表-->
+    <insert id="addPay" parameterType="GmdPay">
+        insert into payitems(patitemsName,metertID,payitemstId,payitemsmoney,begintime,itemsid,payitemsstatus)VALUES
+        (#{patitemsname},#{metertid},#{payitemstid},#{payitemsmoney},#{begintime},#{itemsid},0);
+    </insert>
+    <!--修改时查询-->
+    <select id="selUp" parameterType="GmdPay" resultType="GmdPay">
+        select * from payitems p left join metert m on p.metertID=m.metertID
+        left join payitemst pt on p.payitemstId=pt.payitemstId
+        left join  items i on i.itemsid=p.itemsid where payitemsId=#{payitemsid}
+    </select>
+    <!--执行修改-->
+    <update id="upPay" parameterType="GmdPay">
+        update payitems set patitemsName=#{patitemsname},metertID=#{metertid},payitemstId=#{payitemstid},payitemsmoney=#{payitemsmoney},begintime=#{begintime},itemsid=#{itemsid}
+        where payitemsId=#{payitemsid}
+
+
+    </update>
+
+    <!--添加时查询收费名称是否存在-->
+    <select id="selPay" parameterType="GmdPay" resultType="int">
+        select count(patitemsName) from payitems where patitemsName=#{patitemsname}
+    </select>
+
+</mapper>

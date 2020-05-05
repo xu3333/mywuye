@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css">
+    <script src="https://www.layuicdn.com/layui/layui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<form class="layui-form">
+    <input type="hidden" th:value="${repairList.repairlistid}" name="repairlistid">
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属房间：</label>
+        <div class="layui-input-block">
+            <input type="text" name="roomno" th:value="${repairList.roomno}" lay-verify="title" autocomplete="off"  class="layui-input" disabled="disabled">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">联系人：</label>
+        <div class="layui-input-block">
+            <input type="text" name="clientname" th:value="${repairList.clientname}"   class="layui-input" disabled="disabled">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">联系电话：</label>
+        <div class="layui-input-block">
+            <input type="text" name="contactsnumber" th:value="${repairList.contactsnumber}" class="layui-input" disabled="disabled">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">预约时间：</label>
+        <div class="layui-input-block">
+            <input type="text" name="applicationtime" th:value="${repairList.applicationtime}"  class="layui-input" disabled="disabled">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">报修类型：</label>
+        <div class="layui-input-block">
+            <input type="text" name="repairtype" th:value="${repairList.repairtype}"  class="layui-input" disabled="disabled">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">报修项目：</label>
+        <div class="layui-input-block">
+            <input type="text" name="repairproject" th:value="${repairList.repairproject}"  class="layui-input" disabled="disabled">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">紧急程度：</label>
+        <div class="layui-input-block">
+            <input type="text" name="importancedegree" th:value="${repairList.importancedegree}"  class="layui-input" disabled="disabled">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">问题描述：</label>
+        <div class="layui-input-block">
+            <input type="text" name="problemdescription" th:value="${repairList.problemdescription}"  class="layui-input" disabled="disabled">
+        </div>
+    </div>
+
+
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">受理信息</li>
+            <li>派工信息</li>
+            <li>收费信息</li>
+            <li>业务完成</li>
+            <li>用户评价信息</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">受理人：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="finishren" th:value="${repairList.finishren}"  class="layui-input" disabled="disabled">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">要求完成时间：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="requiredcompletiontime" th:value="${repairList.requiredcompletiontime}"  class="layui-input" disabled="disabled">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">受理备注：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="acceptedremarks" th:value="${repairList.acceptedremarks}"  class="layui-input" disabled="disabled">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">受理人：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="finishren" th:value="${repairList.finishren}"  class="layui-input" disabled="disabled">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">派工备注：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="workremarks" th:value="${repairList.workremarks}"  class="layui-input" disabled="disabled">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">收费项目：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="chargeproject" th:value="${repairList.chargeproject}"  class="layui-input" disabled="disabled">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">收费方式：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="chargetype" th:value="${repairList.chargetype}"  class="layui-input" disabled="disabled">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">单价：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="price" th:value="${repairList.price}" class="layui-input" disabled="disabled">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">收费人：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="finishren"  th:value="${repairList.finishren}"  class="layui-input" disabled="disabled">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">完工人：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="finishren" th:value="${repairList.finishren}"  class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">完工备注：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="completeremarks" th:value="${repairList.completeremarks}"  class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">满意度：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="degreeofsatisfaction" th:value="${repairList.degreeofsatisfaction}"  class="layui-input">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div style="margin-left: 210px">
+        <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="tijiao">提交</button>
+    </div>
+</form>
+<script type="text/javascript">
+    layui.use(['form', 'layer', 'laydate','element'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,laydate = layui.laydate
+            ,element = layui.element
+            ,$=layui.jquery;
+        //监听提交
+        form.on('submit(tijiao)', function(data){
+            //data.field表单所有信息
+            $.post("updateYwwc",data.field,function(result)
+                {
+                    layer.msg(result.msg, {
+                        icon: 1,
+                        time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                    }, function(){
+                        //刷新父页面
+                        parent.window.location.reload();
+                    });
+                }
+            );
+            return false;
+        });
+    });
+</script>
+
+</body>
+</html>

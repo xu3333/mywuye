@@ -1,0 +1,18 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yunhan.mapper.ReceivableMapper">
+
+    <select id="selectAll" resultType="map" parameterType="map" >
+        select m.*,p.*,f.*,SUM(f.assessment) num from meter m,payitems p,feecontent f where m.payitemsId=p.payitemsId=f.clientMessageId GROUP BY m.precinct;
+   </select>
+   <select id="selectCount" resultType="int">
+       select count(*) from meter m LEFT JOIN payitems p on m.payitemstid=p.payitemsid
+       <where>1=1
+            <if test="precinct!=null and precinct!=''">
+                and precinct like concat('%',concat(#{precinct},'%'))
+            </if>
+       </where>
+   </select>
+</mapper>

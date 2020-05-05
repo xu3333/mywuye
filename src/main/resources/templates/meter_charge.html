@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>抄表审核</title>
+    <!--<link type="text/css" rel="stylesheet" th:href="@{/css/layui.css}" media="all"/>-->
+    <!--<link type="text/css" rel="stylesheet" th:href="@{/css/layer.css}"/>-->
+    <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css">
+    <script src="https://www.layuicdn.com/layui/layui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+</head>
+<body>
+<div class="demoTable">
+    搜索姓名：
+    <div class="layui-inline">
+        <input class="layui-input" name="clientName" id="demoReload" autocomplete="off" placeholder="请输入客户姓名">
+    </div>
+    <button class="layui-btn" data-type="reload" id="searchBtn">搜索</button>
+
+</div>
+<table class="layui-hide" id="demo" lay-filter="test"></table>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="getAuditBtn" id="auditBtn">选择审核</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getAuditBtnAll" id="auditBtnAll">批量撤销审核</button>
+        <!--<button class="layui-btn layui-btn-sm" lay-event="getReAuditBtnAll" id="reAuditBtn">撤销审核</button>-->
+    </div>
+</script>
+</body>
+<script type="text/html" id="buttonTpl">
+    {{#
+    if(d.auditStatus == 1){
+    }}
+    <button class="layui-btn layui-btn-xs">已审核</button>
+    {{#
+    }else {
+    }}
+    <button class="layui-btn layui-btn-primary layui-btn-xs">未审核</button>
+    {{#
+    }
+    }}
+</script>
+<script type="text/html" id="switchTpl">
+    <input type="checkbox" name="meterReadStatus" value="{{d.meterID}}" lay-skin="switch" lay-text="ON|OFF" lay-filter="meterReadStatus" {{d.meterReadStatus=='true'?'checked':''}} >
+</script>
+
+<script type="text/javascript" th:src="@{/js/layui.all.js}"></script>
+<script>
+    layui.use([ 'laypage', 'layer', 'table','form'], function() {
+        var laypage = layui.laypage //分页
+            , layer = layui.layer //弹层
+            , table = layui.table//表格
+            , form =layui.form;
+        //执行一个 table 实例
+        table.render({
+            elem: '#demo'
+            , height: 550
+            , url: 'listChargeData' //数据接口
+            ,toolbar:'#toolbarDemo'
+            , title: '用户表'
+            , page: true //开启分页
+            , totalRow: true //开启合计行
+            , limits: [5, 10, 15]
+            , cols: [
+                [ //表头, totalRowText: '合计：'
+                    {type: 'checkbox', fixed: 'left'}
+                    , {field: 'meterID', title: '',templet:'#id', width: 80, sort: true, fixed: 'left'}
+                    , {field: 'auditStatus', title: '审核状态',templet:'#buttonTpl',align:'center', width: 100}
+                    , {field: 'roomID', title: '房间id', width: 150, sort: true,hide:true}
+                    , {field: 'roomNo', title: '房间编号', width: 150, sort: true}
+                    , {field: 'clientName', title: '客户', width: 100, sort: true}
+                    , {field: 'patitemsName', title: '收费项', width: 100}
+                    , {field: 'meterReadTime', title: '抄表期', width: 150, sort: true}
+                    , {field: 'utility', title: '实用量', width: 100, sort: true}
+                    , {field: 'meterReadStatus', title: '抄表状态',templet:'#switchTpl', width: 150}
+                    , {field: 'payitemsmoney', title: '收费单价', width: 100,hide:true}
+                    , {field: 'remark', title: '备注', width: 250}
+                ]
+            ]
+            , id: 'listData'
+        });
+
+            //执行条件查询
+            /*条件查询按钮*/
+            var $ = layui.$;
+            $('#searchBtn').on('click', function () {
+                //获取输入框
+                var demoReload = $('#demoReload');
+                //执行重载
+                table.reload('listData', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: {
+                        clientName: demoReload.val()
+                    }
+                });
+            });
+        //选择审核
+
+        table.on('toolbar(test)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id); //获取选中行状态
+             var data = checkStatus.data;  //获取选中行数据
+            switch(obj.event){
+                //执行单项审核
+                case 'getAuditBtn':
+                   if(data.length===0){
+                       layer.msg('请选择一行');
+                   }else {
+                       layer.confirm('确认对此项进行审核吗？', function () {
+                           //layer.alert(checkStatus.data[0].meterID);
+                           $.post("audit",{'meterID':checkStatus.data[0].meterID},function(result)
+                               {
+                                   layer.msg(
+                                       result.msg, {
+                                           icon: 1,
+                                           time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                                       }, function(){
+                                           //自定义刷新当前页面
+                                           setTimeout('window.location.reload()',1000);
+                                           $.post("bill",{'roomID':checkStatus.data[0].roomID,'meterReadTime':checkStatus.data[0].meterReadTime,'patitemsName':checkStatus.data[0].patitemsName,'utility':checkStatus.data[0].utility,'payitemsmoney':checkStatus.data[0].payitemsmoney,'remark':checkStatus.data[0].remark},function (result) {
+                                               layer.msg(
+                                                   result.msg, {
+                                                       icon: 1,
+                                                       time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                                                   }, function(){
+                                                       //自定义刷新当前页面
+                                                       setTimeout('window.location.reload()',1000);
+                                                   });
+                                           })
+                                       });
+                               }
+                           );
+                       });
+                     }
+                    break;
+                   //执行多项撤销审核
+                case 'getAuditBtnAll':
+                    if(data.length===0){
+                        layer.msg("请至少选择一行！")
+                    }else {
+                        var id='';
+                        for(var i=0;i<data.length;i++){
+                            id +=checkStatus.data[i].meterID+','
+                        }
+                      //layer.alert('选中：'+id);
+                        layer.confirm('确认撤销审核所选信息吗？', function () {
+                            //layer.alert(checkStatus.data[0].meterID);
+                            $.post("auditAll",{'meterID':id.substr(0, id.length-1)},function(result)
+                                {
+                                    layer.msg(
+                                        result.msg, {
+                                            icon: 1,
+                                            time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                                        }, function(){
+                                            //自定义刷新当前页面
+                                            setTimeout('window.location.reload()',1000);
+                                        });
+                                }
+                            );
+                        });
+                    }
+                    break;
+                /*case  'getReAuditBtnAll':
+                  if(data.length===0){
+                       layer.msg("请至少选择一行！")
+                   }else {
+                       $.post("reAudit",{'meterID':checkStatus.data[0].meterID},function(result)
+                       {
+                           layer.msg(
+                               result.msg, {
+                                   icon: 1,
+                                   time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                               }, function(){
+                                   //自定义刷新当前页面
+                                   setTimeout('window.location.reload()',1000);
+                               });
+                       });
+                   }*/
+            };
+        });
+
+        form.on('switch(meterReadStatus)',function (obj) {
+       if (obj.elem.checked == true) {
+           $.post("update_true",{'meterID':obj.value},function(result)
+               {
+                   layer.msg(
+                       result.msg, {
+                           icon: 1,
+                           time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                       }, function(){
+                           //自定义刷新当前页面
+                           setTimeout('window.location.reload()',1000);
+                       });
+               }
+           );
+       }else{
+           $.post("update_false",{'meterID':obj.value},function(result)
+               {
+                   layer.msg(
+                       result.msg, {
+                           icon: 1,
+                           time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                       }, function(){
+                           //自定义刷新当前页面
+                           setTimeout('window.location.reload()',1000);
+                       });
+               }
+           );
+       }
+   })
+    });
+
+</script>
+</html>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhan.mapper.BillMappper">
+    <insert id="add_bill" parameterType="com.yunhan.entity.MeterCharge">
+        insert into bill(roomID,endtime,payproject,practical,price,assessment,remark)
+        values(#{roomID},#{meterReadTime},#{patitemsName},#{utility},#{payitemsmoney},#{utility} * #{payitemsmoney},#{remark})
+    </insert>
+   <!--判断数据是否已经存在-->
+    <select id="find_bill" resultType="com.yunhan.entity.MeterCharge"  parameterType="com.yunhan.entity.MeterCharge">
+          select roomID,payproject from bill where roomID=#{roomID} and payproject=#{patitemsName}
+    </select>
+    <!--如果数据存在将直接修改信息而不添加-->
+    <update id="up_bill" parameterType="com.yunhan.entity.MeterCharge">
+          update bill set endtime=#{meterReadTime},practical=#{utility},price=#{utility} * #{payitemsmoney},remark=#{remark}
+          where roomID=#{roomID} and  payproject=#{patitemsName}
+    </update>
+</mapper>

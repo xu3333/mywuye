@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>表格</title>
+
+    <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css">
+    <script src="https://www.layuicdn.com/layui/layui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<style>
+</style>
+<body>
+
+<div class="demoTable">
+    搜索姓名：
+    <div class="layui-inline">
+        <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+    </div>
+    <button class="layui-btn" data-type="reload" id="searchBtn">搜索</button>
+</div>
+
+<table class="layui-hide" id="demo" lay-filter="test"></table>
+
+<script>
+    layui.use([ 'laypage', 'layer', 'table'], function(){
+        var laypage = layui.laypage //分页
+            ,layer = layui.layer //弹层
+            ,table = layui.table;//表格
+
+
+        //执行一个 table 实例
+        table.render({
+            elem: '#demo'
+            ,height: 550
+            ,url: 'listDataReceivable' //数据接口
+            ,title: '用户表'
+            ,page: true //开启分页
+            //,toolbar: '#toolbarDemo' //开启工具栏，此处显示默认图标，可以自定义模板
+            ,totalRow: true //开启合计行
+            ,limits:[5,10,15]
+
+            ,cols: [
+                [ //表头
+                    {field: 'meterID', title: '管理区编号', width:150, sort: true, fixed: 'left'}
+                    ,{field: 'precinct', title: '管理区', width:150}
+                    ,{field: 'num', title: '应缴金额', width: 150, sort: true}
+                    ,{field: 'remark', title: '备注', width: 1085}
+                ]
+            ]
+            , id: 'listDataReceivable'
+        });
+
+        //监听头工具栏事件
+        table.on('toolbar(test)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id)
+                ,data = checkStatus.data; //获取选中的数据
+            switch(obj.event){
+
+            };
+        });
+
+        //分页
+        laypage.render({
+            elem: 'pageDemo' //分页容器的id
+            ,count: 100 //总页数
+            ,skin: '#1E9FFF' //自定义选中色值
+            //,skip: true //开启跳页
+            ,jump: function(obj, first){
+                if(!first){
+                    layer.msg('第'+ obj.curr +'页', {offset: 'b'});
+                }
+            }
+        });
+
+      //执行条件查询
+        /*条件查询按钮*/
+        var $ = layui.$;
+        $('#searchBtn').on('click', function(){
+            //获取输入框
+            var demoReload = $('#demoReload');
+            //执行重载
+            table.reload('listDataReceivable', {
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+                ,where: {
+                    precinct: demoReload.val()
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
