@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5541ef52-aba5-4a54-9153-a69b5440d03e" name="Default" comment="创建">
+    <list default="true" id="5541ef52-aba5-4a54-9153-a69b5440d03e" name="Default" comment="加个空格">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/yunhan/AdminApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yunhan/AdminApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -300,7 +301,7 @@
       <workItem from="1588560611292" duration="20775000" />
       <workItem from="1588646634074" duration="17260000" />
       <workItem from="1589011049495" duration="833000" />
-      <workItem from="1589011903840" duration="300000" />
+      <workItem from="1589011903840" duration="841000" />
     </task>
     <task id="LOCAL-00001" summary="加入天赐项目">
       <created>1573105378911</created>
@@ -344,7 +345,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589012189112</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="加个空格">
+      <created>1589012226145</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1589012226145</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -367,7 +375,8 @@
     <MESSAGE value="加入天赐项目" />
     <MESSAGE value="老王测试" />
     <MESSAGE value="创建" />
-    <option name="LAST_COMMIT_MESSAGE" value="创建" />
+    <MESSAGE value="加个空格" />
+    <option name="LAST_COMMIT_MESSAGE" value="加个空格" />
   </component>
   <component name="WindowStateProjectService">
     <state x="403" y="37" key="#AdminApplication" timestamp="1589011830330">
