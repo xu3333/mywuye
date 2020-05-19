@@ -46,6 +46,7 @@ public class GmdClientController {
        model.addAttribute("ed",ed);
         return "addgclient";
     }
+
     //执行添加
     @RequestMapping("/addClient")
     @ResponseBody
@@ -66,6 +67,7 @@ public class GmdClientController {
         }
         return result;
     }
+
 //    @RequestMapping("/delClient")
 //    @ResponseBody
 //    public tableResult<com.yunhan.entity.GmdClient> delClient(Integer clientmessageid){
@@ -75,6 +77,7 @@ public class GmdClientController {
 //        return result;
 //
 //    }
+
     //修改时查询
     @RequestMapping("/selUpClient")
     public String selUpClient(Integer clientmessageid, Model model, com.yunhan.entity.GmdClient gmdClient){

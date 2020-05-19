@@ -104,17 +104,17 @@ public class GmdCarController {
     @ResponseBody
     public com.yunhan.entity.ResultOne<com.yunhan.entity.GmdCar> UpCar(com.yunhan.entity.GmdCar gmdCar, String carportno){
         com.yunhan.entity.ResultOne result=new com.yunhan.entity.ResultOne();
-        int a=gmdCarService.selAddcar(carportno);
-        if(a>0){
-            result.setMsg("已存在无法修改");
-            result.setData(false);
-            return result;
-        }else {
+//        int a=gmdCarService.selAddcar(carportno);
+//        if(a>0){
+//            result.setMsg("已存在无法修改");
+//            result.setData(false);
+//            return result;
+//        }else {
             gmdCarService.UpCar(gmdCar);
             result.setMsg("修改成功");
             result.setData(true);
             return  result;
-        }
+//        }
 
     }
     //跳转车位绑定页面  查询车位类型表
