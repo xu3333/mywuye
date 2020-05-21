@@ -4,14 +4,32 @@
 
 <mapper namespace="com.yunhan.mapper.ReceivablesMapper">
     <select id="selectAll" resultType="map" parameterType="map">
-        select r.roomNO,r.roomArea,b.endtime,b.payproject,b.practical,b.price,b.assessment,b.remark,c.clientName,c.phone,bl.buildingName
-        from room r,bill b,clientmessage c,louceng l,building bl,meter m
-        <where> r.roomID=b.roomID and m.homeNO=r.roomID  and r.clientMessageId=c.clientMessageId and r.loucengID=l.loucengID and l.buildingID=bl.buildingID and m.auditStatus=1 and b.assessment!=0
-            <if test="roomNO!=null and roomNO!=''">
-                and r.roomNO like concat('%',concat(#{roomNO},'%'))
+<!--        select r.roomNO,r.roomArea,b.endtime,b.payproject,b.practical,b.price,b.assessment,b.remark,c.clientName,c.phone,bl.buildingName-->
+<!--        from room r,bill b,clientmessage c,louceng l,building bl,meter m-->
+<!--        <where>-->
+<!--         r.roomID=b.roomID-->
+<!--         and m.homeNO=r.roomID-->
+<!--         and r.clientMessageId=c.clientMessageId-->
+<!--         and r.loucengID=l.loucengID-->
+<!--         and l.buildingID=bl.buildingID-->
+<!--         and m.auditStatus=1-->
+<!--         and b.assessment!=0-->
+<!--            <if test="roomNO!=null and roomNO!=''">-->
+<!--                and r.roomNO like concat('%',concat(#{roomNO},'%'))-->
+<!--            </if>-->
+<!--        </where>-->
+<!--        order by r.roomNO LIMIT #{begin},#{end}-->
+        select y.buildingname,r.roomNO,c.clientName,r.roomArea,c.phone,b.endtime,b.payproject,b.practical,b.price,b.assessment,b.remark from
+        bill b,room r,building y,louceng l,clientmessage c
+        <where> b.roomID=r.roomID
+            and r.loucengID=l.loucengID
+            and l.buildingID=y.buildingID
+            and r.clientMessageId=c.clientMessageId
+            and b.assessment >0
+            <if test="clientname!=null and clientname!=''">
+                and c.clientname like concat('%',concat(#{clientname},'%'))
             </if>
-        </where>
-        order by r.roomNO LIMIT #{begin},#{end}
+        </where>LIMIT #{begin},#{end}
     </select>
 
 </mapper>
