@@ -39,6 +39,8 @@ public interface GmdCarService {
     //执行车位绑定时修改客户信息里的车位id
     public int upBtncar(GmdCar gmdCar);
 
+    //解除车位绑定
+    public int delBtncar(GmdCar gmdCar);
 
     //修改车位信息
     public int upCarp(Integer carportid);

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>缴费结账</title>
+    <title>交费一览</title>
     <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css">
     <script src="https://www.layuicdn.com/layui/layui.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -33,7 +33,7 @@
         table.render({
             elem: '#demo'
             , url: 'sell' //数据接口
-            , title: '缴费结账'
+            , title: '交费一览'
             , page: true //开启分页
             , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板
             , totalRow: true //开启合计行
@@ -41,17 +41,22 @@
             , cols: [
                 [ //表头
                     {type: 'checkbox', fixed: 'left'}
-                    ,{field: 'roomID', title: '编号'}
-                    ,{field: 'roomNo', title: '房间编号'}
-                    ,{field: 'clientname', title: '客户姓名'}
-                    ,{field: 'assessment', title: '应交金额'}
-                    ,{field: 'balance', title: '账户余额'}
-                    ,{field: 'collectDate', title: '收费日期'}
-                    ,{field: 'tollgatherer', title: '收费员'}
-                    ,{field: 'paymentType', title: '付款方式'}
-                    ,{field: 'fremark', title: '备注'}
+                    // ,{field: 'roomID', title: '编号'}
+                    // ,{field: 'roomNo', title: '房间编号'}
+                    // ,{field: 'clientname', title: '客户姓名'}
+                    // ,{field: 'assessment', title: '应交金额'}
+                    // ,{field: 'balance', title: '账户余额'}
+                    // ,{field: 'collectDate', title: '收费日期'}
+                    // ,{field: 'tollgatherer', title: '收费员'}
+                    // ,{field: 'paymentType', title: '付款方式'}
+                    // ,{field: 'fremark', title: '备注'}
+                    ,{field: 'roomNO', title: '房间编号'}
+                    ,{field: 'clientName', title: '客户姓名'}
+                    ,{field: 'assessment', title: '欠款金额'}
+                    ,{field: 'remark', title: '备注'}
 
                 ]
+
             ]
             , id: 'sell'
         });

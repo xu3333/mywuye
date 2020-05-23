@@ -101,6 +101,10 @@ public class GmdCarServiceImpl implements GmdCarService {
         return gmdCarMapper.upBtncar(gmdCar);
     }
 
+    public int delBtncar(GmdCar gmdCar){
+        return gmdCarMapper.delBtncar(gmdCar);
+    }
+
     @Override
     public int upCarp(Integer carportid) {
         return gmdCarMapper.upCarp(carportid);

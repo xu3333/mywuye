@@ -31,7 +31,11 @@
     {{# } }}
 
     {{# if(d.cartportStatus == 0 ){ }}
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-size="lg" lay-event="editBtn">车位绑定</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-size="lg" lay-event="editBtn">绑定</a>
+    {{# } }}
+
+    {{# if(d.cartportStatus == 1 ){ }}
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-size="lg" lay-event="editBtnq">解绑</a>
     {{# } }}
 
 </script>
@@ -150,6 +154,25 @@
                 //操作
                 layer.confirm('真的要启用吗？', function () {
                     $.post("delqCar",{'carportid':data.carportID},function(result)
+                        {
+                            layer.msg(
+                                result.msg, {
+                                    icon: 1,
+                                    time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                                }, function(){
+                                    //刷新父页面
+                                    location.reload();
+                                });
+                        }
+                    );
+                });
+            }
+
+            //解绑
+            if(layEvent === 'editBtnq'){
+                //操作
+                layer.confirm('真的要解绑吗？', function () {
+                    $.post("editBtnq",{'clientname':data.clientname},function(result)
                         {
                             layer.msg(
                                 result.msg, {

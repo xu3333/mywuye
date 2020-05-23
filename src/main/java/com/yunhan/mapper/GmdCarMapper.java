@@ -53,8 +53,6 @@ public interface GmdCarMapper {
     //点击提交时把客户状态恢复未使用状态
     public int upWei(GmdCar gmdCar);
 
-
-
-
-
+    //解除车位绑定
+     public int delBtncar(GmdCar gmdCar);
 }

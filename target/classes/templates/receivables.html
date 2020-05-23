@@ -42,7 +42,7 @@
                 [ //表头, totalRowText: '合计：'
                     {type: 'checkbox', fixed: 'left'}
                     , {type: 'numbers', title: '编号',  width: 100, fixed: 'left',totalRowText: '合计应缴费用：'}
-                    , {field: 'buildingName', title: '楼宇', width: 100, align: 'center'}
+                    // , {field: 'buildingName', title: '楼宇', width: 100, align: 'center'}
                     , {field: 'roomNO', title: '房间编号', width: 150}
                     , {field: 'clientName', title: '客户姓名', width: 100}
                     , {field: 'roomArea', title: '房产面积', width: 100, align: 'center'}
@@ -61,6 +61,19 @@
 
         });
 
+        //分页
+        laypage.render({
+
+            elem: 'pageDemo' //分页容器的id
+            ,count: 100 //总页数
+            ,skin: '#1E9FFF' //自定义选中色值
+            //,skip: true //开启跳页
+            ,jump: function(obj, first){
+                if(!first){
+                    layer.msg('第'+ obj.curr +'页', {offset: 'b'});
+                }
+            }
+        });
         //执行条件查询
         /*条件查询按钮*/
         var $ = layui.$;

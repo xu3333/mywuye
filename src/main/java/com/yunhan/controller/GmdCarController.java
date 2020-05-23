@@ -154,6 +154,17 @@ public class GmdCarController {
         result.setMsg("修改成功");
         return  result;
     }
+    //接触车位绑定
+    @RequestMapping("editBtnq")
+    @ResponseBody
+    public com.yunhan.entity.ResultOne<com.yunhan.entity.GmdCar> editBtnq(com.yunhan.entity.GmdCar gmdCar,Integer carportid){
+        gmdCarService.upWei(gmdCar);
+        gmdCarService.delBtncar(gmdCar);
+
+        com.yunhan.entity.ResultOne result=new com.yunhan.entity.ResultOne();
+        result.setMsg("解绑成功");
+        return result;
+    }
 
 
 }

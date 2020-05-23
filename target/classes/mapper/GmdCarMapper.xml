@@ -79,6 +79,11 @@
 
     </update>
 
+<!--    解除车位绑定-->
+    <update id="delBtncar" parameterType="GmdCar">
+        update clientMessage set carportID=null where clientname=#{clientname}
+    </update>
+
 
     <!--修改车位信息-->
     <update id="upCarp" parameterType="int">
