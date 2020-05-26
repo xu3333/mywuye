@@ -5,6 +5,6 @@
                 update bill set assessment=0 where roomID=(select roomid from room where roomNo=#{roomno})AND payproject=#{payproject}
           </update>
     <insert id="addcharge" parameterType="Ycharge">
-        insert into feecontent(clientMessageId,assessment,collectDate,tollgatherer,paymentType) VALUES((select clientMessageId from clientmessage where clientname=#{clientname}),#{assessment},now(),#{tollgatherer},#{paymenttype})
+        insert into feecontent(clientMessageId,assessment,payproject,collectDate,tollgatherer,paymentType) VALUES((select clientMessageId from clientmessage where clientname=#{clientname}),#{assessment},#{payproject},now(),#{tollgatherer},#{paymenttype})
     </insert>
 </mapper>
