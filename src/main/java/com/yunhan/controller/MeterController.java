@@ -219,21 +219,21 @@ public class MeterController {
     }
 
 
-    //应收费用
-    @RequestMapping("receivables")
-    public String receivables(){
-        return "receivables";
-    }
-    //查询数据
-    @RequestMapping("listReceivables")
-    @ResponseBody
-    public tableResult<Map> listData(pageCount pageCount,Receivables receivables){
-        tableResult<Map> result=new tableResult<>();
-        List<Map> list=receivablesService.selectAll(pageCount,receivables);
-        //设置表格有多少条数据
-        int count=20;
-        result.setData(list);
-        result.setCount(count);
-        return result;
-    }
+//    //应收费用
+//    @RequestMapping("receivables")
+//    public String receivables(){
+//        return "receivables";
+//    }
+//    //查询数据
+//    @RequestMapping("listReceivables")
+//    @ResponseBody
+//    public tableResult<Map> listData(pageCount pageCount,Receivables receivables){
+//        tableResult<Map> result=new tableResult<>();
+//        List<Map> list=receivablesService.selectAll(pageCount,receivables);
+//        //设置表格有多少条数据
+//        int count=20;
+//        result.setData(list);
+//        result.setCount(count);
+//        return result;
+//    }
 }

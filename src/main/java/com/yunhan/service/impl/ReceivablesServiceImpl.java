@@ -27,4 +27,10 @@ public class ReceivablesServiceImpl implements ReceivablesService {
         map.put("roomNO",receivables.getRoomNO());
         return receivablesMapper.selectAll(map);
     }
+
+    //    原因不明的出错
+//    @Override
+//    public int selectAllCount(Receivables receivables){
+//        return receivablesMapper.selectAllCount(receivables);
+//    }
 }

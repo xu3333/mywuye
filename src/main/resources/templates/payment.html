@@ -33,11 +33,12 @@
         table.render({
             elem: '#demo'
             , url: 'sell' //数据接口
+            , height: 550
             , title: '交费一览'
             , page: true //开启分页
             , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板
             , totalRow: true //开启合计行
-            , limits: [1, 3, 5]
+            , limits: [5, 10, 15]
             , cols: [
                 [ //表头
                     {type: 'checkbox', fixed: 'left'}

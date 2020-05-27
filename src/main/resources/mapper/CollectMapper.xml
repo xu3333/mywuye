@@ -20,12 +20,26 @@
         LIMIT #{begin},#{end}
     </select>
     <select id="selcolCount" resultType="int">
-        select count(*) from clientMessage c,room r,louceng l,building b,items i,payitems p,feecontent f
-        <where>c.clientMessageId=r.clientMessageId and r.loucengID=l.loucengID
-            and l.buildingID=b.buildingID and p.itemsid=i.itemsid and f.clientMessageId=c.clientMessageId
-            <if test="clientname!=null and clientname!=''">
-                and clientname like concat('%',concat(#{clientname},'%'))
-            </if>
-        </where>
+<!--        select count(*) from clientMessage c,room r,louceng l,building b,items i,payitems p,feecontent f-->
+<!--        <where>c.clientMessageId=r.clientMessageId and r.loucengID=l.loucengID-->
+<!--            and l.buildingID=b.buildingID and p.itemsid=i.itemsid and f.clientMessageId=c.clientMessageId-->
+<!--            <if test="clientname!=null and clientname!=''">-->
+<!--                and clientname like concat('%',concat(#{clientname},'%'))-->
+<!--            </if>-->
+<!--        </where>-->
+        select count(distinct r.roomno,c.clientname,p.patitemsName,f.paymentType,f.assessment,f.collectDate,f.tollgatherer)
+        from clientMessage c,room r,louceng l,building b,items i,payitems p,feecontent f,bill bl
+        where c.clientMessageId=r.clientMessageId
+        and r.loucengID=l.loucengID
+        and l.buildingID=b.buildingID
+        and p.itemsid=i.itemsid
+        and f.clientMessageId=c.clientMessageId
+        and f.payproject=p.patitemsName
+        <if test="clientname!=null and clientname!=''">
+            and c.clientname like concat('%',concat(#{clientname},'%'))
+        </if>
+        <if test="testh!=null and testh!=''">
+            and f.collectDate between #{Cbegin} and #{Cend}
+        </if>
     </select>
 </mapper>

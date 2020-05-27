@@ -9,4 +9,6 @@ import java.util.Map;
 
 public interface ReceivablesService {
     List<Map> selectAll(pageCount pageCount, Receivables receivables);
+    //    原因不明的出错
+//    int selectAllCount(Receivables receivables);
 }
