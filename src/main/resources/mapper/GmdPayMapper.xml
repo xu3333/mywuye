@@ -14,12 +14,13 @@
         </where>LIMIT #{begin},#{end}
     </select>
     <select id="selectCount" resultType="int">
-        select count(*) from payitemst
-        <where>1=1
-            <if test="patitemstname!=null and patitemstname!=''">
-                and patitemstname like concat('%',concat(#{patitemstname},'%'))
-            </if>
-        </where>
+<!--        select count(*) from payitemst-->
+<!--        <where>1=1-->
+<!--            <if test="patitemstname!=null and patitemstname!=''">-->
+<!--                and patitemstname like concat('%',concat(#{patitemstname},'%'))-->
+<!--            </if>-->
+<!--        </where>-->
+        select count(*) from payitems
     </select>
 
 <!--删除时修改id为1-->
