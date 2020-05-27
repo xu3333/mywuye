@@ -24,11 +24,22 @@
         </where>LIMIT #{begin},#{end}
     </select>
     <select id="sellCount" resultType="int">
-        select count(*) from room r LEFT JOIN clientMessage c on c.clientMessageId=r.clientMessageId
-        LEFT JOIN feecontent f on f.clientMessageId=c.clientMessageId
-        <where>1=1
+<!--        select count(*) from room r LEFT JOIN clientMessage c on c.clientMessageId=r.clientMessageId-->
+<!--        LEFT JOIN feecontent f on f.clientMessageId=c.clientMessageId-->
+<!--        <where>1=1-->
+<!--            <if test="clientname!=null and clientname!=''">-->
+<!--                and clientname like concat('%',concat(#{clientname},'%'))-->
+<!--            </if>-->
+<!--        </where>-->
+        select count(*) from
+        bill b,room r,building y,louceng l,clientmessage c
+        <where> b.roomID=r.roomID
+            and r.loucengID=l.loucengID
+            and l.buildingID=y.buildingID
+            and r.clientMessageId=c.clientMessageId
+            and b.assessment >0
             <if test="clientname!=null and clientname!=''">
-                and clientname like concat('%',concat(#{clientname},'%'))
+                and c.clientname like concat('%',concat(#{clientname},'%'))
             </if>
         </where>
     </select>

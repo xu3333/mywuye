@@ -32,4 +32,19 @@
         </where>LIMIT #{begin},#{end}
     </select>
 
+<!--    //    原因不明的出错-->
+<!--    <select id="selectAllCount" resultType="int">-->
+<!--        select count(y.buildingname,r.roomNO,c.clientName,r.roomArea,c.phone,b.endtime,b.payproject,b.practical,b.price,b.assessment,b.remark) from-->
+<!--        bill b,room r,building y,louceng l,clientmessage c-->
+<!--        <where> b.roomID=r.roomID-->
+<!--            and r.loucengID=l.loucengID-->
+<!--            and l.buildingID=y.buildingID-->
+<!--            and r.clientMessageId=c.clientMessageId-->
+<!--            and b.assessment >0-->
+<!--            <if test="clientName!=null and clientName!=''">-->
+<!--                and c.clientName like concat('%',concat(#{clientName},'%'))-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
 </mapper>
